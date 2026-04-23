@@ -23,8 +23,10 @@ const authReducer = (
 
 
 
-        case "FOLLOW_USER":
-            return { ...state, authData: { ...state.authData, user: { ...state.authData.user, following: [...state.authData.user.following, action.data] } } }
+        case "FOLLOW_USER": {
+            const newFollowing = [...new Set([...state.authData.user.following, action.data])];
+            return { ...state, authData: { ...state.authData, user: { ...state.authData.user, following: newFollowing } } };
+        }
 
         case "UNFOLLOW_USER":
             return { ...state, authData: { ...state.authData, user: { ...state.authData.user, following: [...state.authData.user.following.filter((personId) => personId !== action.data)] } } }

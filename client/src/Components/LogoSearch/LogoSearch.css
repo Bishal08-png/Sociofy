@@ -1,31 +1,95 @@
 .LogoSearch {
     display: flex;
-    gap: 0.75rem;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: stretch;
+    /* CHANGED: Replaced flex-start with stretch so the search bar perfectly fills the width */
+    width: 100%;
+    box-sizing: border-box;
+    /* ADDED: Prevents container from overflowing its parent */
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    text-decoration: none;
+    transition: transform 0.3s ease;
+}
+
+.brand:hover {
+    transform: scale(1.05);
+}
+
+.brandLogo {
+    width: 44px;
+    height: 44px;
+    object-fit: contain;
+    filter: drop-shadow(0 0 10px rgba(167, 139, 250, 0.4));
+}
+
+.brandName {
+    font-size: 1.8rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, #a78bfa, #60a5fa);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: -1px;
 }
 
 .Search {
     display: flex;
+    align-items: center;
+    /* ADDED: Keeps the input text and the search icon perfectly centered vertically */
     background-color: var(--inputColor);
     border-radius: 10px;
-    padding: 5px;
+    padding: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+    width: 100%;
+    box-sizing: border-box;
+    /* ADDED: Forces the 8px padding to sit INSIDE the 100% width, fixing the overhang */
+}
+
+.Search:focus-within {
+    border-color: var(--purplePain);
+    /* Make sure --purplePain is defined in your root variables! */
+    background-color: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0 15px rgba(167, 139, 250, 0.2);
 }
 
 .Search>input {
     background-color: transparent;
     border: none;
     outline: none;
+    color: var(--black);
+    padding-left: 10px;
+    flex: 1;
+    /* CHANGED: Replaced width: 100% with flex: 1 so it correctly shares space with the search icon without breaking layout */
+}
+
+.Search>input::placeholder {
+    color: rgba(255, 255, 255, 0.4);
 }
 
 .s-icon {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(98.63deg, #6674cc 0%, #b578ff 100%);
-    border-radius: 5px;
-    padding: 4px;
+    background: var(--accentGradient);
+    border-radius: 8px;
+    padding: 6px;
     color: white;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .s-icon:hover {
     cursor: pointer;
+    transform: scale(1.1) rotate(5deg);
+    box-shadow: 0 0 15px rgba(181, 120, 255, 0.6);
+}
+
+.search-result-item:hover {
+    background: rgba(255, 255, 255, 0.1);
 }

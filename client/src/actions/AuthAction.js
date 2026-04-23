@@ -9,6 +9,7 @@ export const logIn = (formData) => async (dispatch) => {
     } catch (error) {
         console.log(error);
         dispatch({ type: 'AUTH_FAIL' })
+        throw error;
     }
 }
 
@@ -23,6 +24,7 @@ export const signUp = (formData) => async (dispatch) => {
     } catch (error) {
         console.log(error);
         dispatch({ type: 'AUTH_FAIL' })
+        throw error;
     }
 }
 

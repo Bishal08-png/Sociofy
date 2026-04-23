@@ -1,6 +1,21 @@
-.Home{
+.Home {
     position: relative;
     display: grid;
-    grid-template-columns: 18rem auto 20rem;   
+    grid-template-columns: 18rem auto 20rem;
     gap: 1rem;
+}
+
+/* ── TABLET (≤ 1024px): hide right sidebar ── */
+@media (max-width: 1024px) {
+    .Home {
+        grid-template-columns: 16rem auto;
+    }
+}
+
+/* ── MOBILE (≤ 768px): single column, sidebar becomes bottom nav ── */
+@media (max-width: 768px) {
+    .Home {
+        grid-template-columns: 1fr;
+        padding-bottom: 5rem; /* space for bottom nav bar */
+    }
 }

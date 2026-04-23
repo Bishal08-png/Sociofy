@@ -1,0 +1,115 @@
+.ChatBox-container {
+    background: var(--cardColor);
+    border-radius: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: var(--glassBorder);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.chat-header {
+    padding: 1rem 1rem 0 1rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.chat-body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding: 1.5rem;
+    overflow-y: scroll;
+    flex: 1;
+}
+
+.message {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--black);
+    padding: 0.7rem;
+    border-radius: 1rem 1rem 1rem 0;
+    max-width: 60%;
+    width: fit-content;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.message-image {
+    max-width: 200px;
+    border-radius: 10px;
+}
+
+.message > span:nth-child(2),
+.message > span:nth-child(3) {
+    font-size: 0.7rem;
+    color: var(--gray);
+    align-self: end;
+}
+
+.own {
+    align-self: flex-end;
+    border-radius: 1rem 1rem 0 1rem;
+    background: var(--accentGradient);
+    color: white;
+}
+
+.own > span:nth-child(2),
+.own > span:nth-child(3) {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.chat-sender {
+    background: rgba(255, 255, 255, 0.05);
+    display: flex;
+    justify-content: space-between;
+    height: 3.5rem;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.8rem;
+    border-radius: 1rem;
+    margin: 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.chat-sender > input {
+    height: 70%;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    flex: 1;
+    font-size: 1rem;
+    color: var(--black);
+}
+
+.chat-sender > div:nth-of-type(1) {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 5px 10px;
+}
+
+.chat-sender > div:nth-of-type(1):hover {
+    background: var(--accentGradient);
+}
+
+.chatbox-empty-message {
+    display: flex;
+    align-self: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    color: var(--gray);
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.img-preview {
+    font-size: 12px;
+    color: var(--purplePain);
+}

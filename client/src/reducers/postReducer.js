@@ -19,6 +19,9 @@ const postReducer = (
         case "RETRIEVING_FAIL":
             return { ...state, loading: false, error: true }
 
+        case "DELETE_POST_SUCCESS":
+            return { ...state, posts: state.posts.filter((post) => post._id !== action.data) }
+
         default:
             return state
     }

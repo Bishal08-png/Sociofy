@@ -2,39 +2,49 @@
   --lightPurple: #b578ff;
   --darkPurple: #6674cc;
   --purplePain: #9615db;
+  --accentGradient: linear-gradient(135deg, #7b2cbf 0%, #3a0ca3 100%);
   --yellow: #f5c32c;
   --orange: #fca61f;
-  --black: #242d49;
-  --gray: rgba(36, 45, 73, 0.65);
-  --profileShadow: 0px 4px 17px 2px rgba(0, 0, 0, 0.25);
-  --hrColor: #cfcdcd;
-  --cardColor: rgba(255, 255, 255, 0.64);
-  --buttonBg: linear-gradient(98.63deg, #6674cc 10%, #9615db 100%);
-  --inputColor: rgba(40, 52, 62, 0.07);
+  --black: #e2e8f0; /* Map black text to light gray for dark mode */
+  --gray: rgba(255, 255, 255, 0.5); /* Replace dark gray with light trans-white */
+  --profileShadow: 0px 8px 32px 0px rgba(0, 0, 0, 0.37);
+  --hrColor: rgba(255, 255, 255, 0.1);
+  --cardColor: rgba(255, 255, 255, 0.05); /* Frosted glass */
+  --buttonBg: linear-gradient(135deg, #7b2cbf 0%, #3a0ca3 100%);
+  --inputColor: rgba(255, 255, 255, 0.05); /* Light glass for inputs */
   --photo: #4CB256;
   --video: #4A4EB7;
   --location: #EF5757;
---shedule: #E1AE4A;
+  --shedule: #E1AE4A;
+  --glassBorder: 1px solid rgba(255, 255, 255, 0.1);
 }
-
 
 .App {
   overflow: hidden;
   color: var(--black);
-  background: #f3f3f3;
-  padding: 1rem 1rem;
+  background: #0F111A;
+  padding: 1rem;
+  min-height: 100vh;
 }
 
-.blur{
+@media (max-width: 768px) {
+  .App {
+    padding: 0.5rem;
+  }
+}
+
+.blur {
   position: absolute;
-  width: 22rem;
-  height: 14rem;
+  width: 28rem;
+  height: 28rem;
   border-radius: 50%;
-  background: #a6ddf0;
-  filter: blur(72px);
+  background: rgba(123, 44, 191, 0.15);
+  filter: blur(120px);
+  z-index: 0;
+  pointer-events: none;
 }
 
-.button{
+.button {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -42,19 +52,20 @@
   background: var(--buttonBg);
   border: none;
   border-radius: 0.5rem;
-  transition: all 100ms ease-out;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(123, 44, 191, 0.4);
 }
 
-.button:hover{
+.button:hover {
   cursor: pointer;
-  background: transparent;
-  color: var(--purplePain);
-  border: 2px solid var(--purplePain);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(123, 44, 191, 0.6);
 }
 
-
-.button:disabled{
-  background: silver;
+.button:disabled {
+  background: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.3);
+  box-shadow: none;
   pointer-events: none;
 }
 

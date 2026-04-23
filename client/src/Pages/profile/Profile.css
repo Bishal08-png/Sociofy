@@ -5,8 +5,19 @@
     gap: 1rem;
 }
 
+
 .ProfilePage-Center{
     display: flex;
     flex-direction: column;
     gap: 1rem;
+}
+
+/* Guest left column — wraps the MiniProfileCard when viewing someone else */
+.profile-left-guest {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-self: start;
+    position: sticky;
+    top: 1rem;
 }

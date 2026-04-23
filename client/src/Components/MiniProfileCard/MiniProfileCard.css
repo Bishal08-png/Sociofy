@@ -1,0 +1,115 @@
+.MiniProfileCard {
+    border-radius: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: var(--cardColor);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: var(--glassBorder);
+    box-shadow: var(--profileShadow);
+    overflow: hidden;
+    width: 100%;
+    transition: transform 0.3s ease;
+    padding-bottom: 1.25rem;
+}
+
+.MiniProfileCard:hover {
+    transform: translateY(-4px);
+}
+
+/* Cover strip */
+.mini-cover {
+    width: 100%;
+    height: 80px;
+    overflow: hidden;
+}
+
+.mini-cover > img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Avatar bubble */
+.mini-avatar-wrap {
+    margin-top: -2.5rem;
+    z-index: 1;
+}
+
+.mini-avatar {
+    width: 5rem;
+    height: 5rem;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #0F111A;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+/* Text section */
+.mini-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    padding: 0.5rem 1rem 0.75rem;
+    width: 100%;
+}
+
+.mini-name {
+    font-weight: 700;
+    font-size: 1rem;
+}
+
+.mini-sub {
+    font-size: 0.8rem;
+    color: var(--gray);
+}
+
+/* Stats row */
+.mini-stats {
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+    margin-top: 0.5rem;
+}
+
+.mini-stats > div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+}
+
+.mini-stats > div > span:first-child {
+    font-weight: bold;
+    font-size: 1rem;
+}
+
+.mini-stats > div > span:last-child {
+    font-size: 0.75rem;
+    color: var(--gray);
+}
+
+.mini-vl {
+    border-left: var(--glassBorder);
+    height: 36px;
+}
+
+/* CTA button */
+.mini-profile-btn {
+    text-decoration: none;
+    color: inherit;
+    font-weight: 600;
+    font-size: 0.85rem;
+    padding: 0.5rem 1.5rem;
+    border-radius: 0.75rem;
+    background: var(--accentGradient);
+    color: white;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.mini-profile-btn:hover {
+    opacity: 0.85;
+    transform: scale(1.03);
+}

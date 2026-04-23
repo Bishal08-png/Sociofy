@@ -12,21 +12,36 @@ const Auth = () => {
     const loading = useSelector((state) => state.authReducer.loading);
 
     const [data, setData] = useState({ firstname: "", lastname: "", email: "", password: "", confirmpass: "" });
+    const [errorMessage, setErrorMessage] = useState('');
 
     const [confirmPass, setConfirmPass] = useState(true);
 
     const handleChange = (e) => {
+        setErrorMessage('');
         setData({ ...data, [e.target.name]: e.target.value })
     }
 
 
-    const handlSubmit = (e) => {
+    const handlSubmit = async (e) => {
         e.preventDefault();
+        setErrorMessage('');
 
         if (isSignUp) {
-            data.password === data.confirmpass ? dispatch(signUp(data)) : setConfirmPass(false)
+            if (data.password === data.confirmpass) {
+                try {
+                    await dispatch(signUp(data));
+                } catch (err) {
+                    setErrorMessage(err.response?.data?.message || err.response?.data || "Signup failed. Please try again.");
+                }
+            } else {
+                setConfirmPass(false);
+            }
         } else {
-            dispatch(logIn(data))
+            try {
+                await dispatch(logIn(data));
+            } catch (err) {
+                setErrorMessage(err.response?.data?.message || err.response?.data || "Invalid email or password.");
+            }
         }
     }
 
@@ -34,6 +49,7 @@ const Auth = () => {
 
     const restForm = () => {
         setConfirmPass(true);
+        setErrorMessage('');
 
         setData({
             firstname: "",
@@ -51,10 +67,13 @@ const Auth = () => {
         //    Left Side
         <div className='Auth'>
             <div className="a-left">
-                <img src={Logo} alt="" />
+                <div className="auth-brand">
+                    <img src={Logo} alt="Sociofy Logo" className="auth-brand-logo" />
+                    <span className="auth-brand-name">Sociofy</span>
+                </div>
                 <div className="Webname">
-                    <h2>Welcome !</h2>
-                    <h5>Explore the ideas throughout <br /> the world.</h5>
+                    <h2>Welcome!</h2>
+                    <h5>Connect, share and explore ideas <br /> throughout the world.</h5>
                 </div>
             </div>
 
@@ -108,6 +127,12 @@ const Auth = () => {
                     <span style={{ display: confirmPass ? "none" : "block", color: "red", fontSize: "12px", alignSelf: "flex-end", marginRight: "5px" }}>
                         * Confirm Password is not same
                     </span>
+
+                    {errorMessage && (
+                        <span style={{ color: "red", fontSize: "12px", alignSelf: "flex-end", marginRight: "5px" }}>
+                            {typeof errorMessage === 'string' ? errorMessage : "Authentication failed."}
+                        </span>
+                    )}
 
 
                     <div>

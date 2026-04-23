@@ -1,73 +1,106 @@
-.PostShare{
+.PostShare {
     display: flex;
     gap: 1rem;
     background-color: var(--cardColor);
     padding: 1rem;
-    border-radius: 1rem;
+    border-radius: 1.5rem;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: var(--glassBorder);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    box-sizing: border-box;
+    width: 100%;
 }
 
-.PostShare > img{
+.PostShare > img {
     border-radius: 50%;
     width: 3rem;
     height: 3rem;
 }
 
-.PostShare > div{
+.PostShare > div {
     display: flex;
     flex-direction: column;
-    width: 90%;
+    flex: 1;
     gap: 1rem;
+    min-width: 0;
 }
 
 .PostShare > div > input {
     background-color: var(--inputColor);
     border-radius: 10px;
-    padding: 10px;
+    padding: 12px;
     font-size: 17px;
-    border: none;
+    border: 1px solid rgba(255, 255, 255, 0.1);
     outline: none;
+    color: var(--black);
+    transition: all 0.3s ease;
+    width: 100%;
+    box-sizing: border-box;
 }
 
-.postOptions{
+.PostShare > div > input:focus {
+    border-color: var(--purplePain);
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.postOptions {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 0.5rem;
+    width: 100%;
+    box-sizing: border-box;
+    flex-wrap: wrap;
+    gap: 1rem;
 }
 
-.option{
-    padding: 5px;
-    padding-left: 10px;
-    padding-right: 10px;
+.postIcons {
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.option {
+    padding: 8px 12px;
     border-radius: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 14px;
+    transition: background-color 0.2s ease;
 }
 
-.option:hover{
+.option:hover {
     cursor: pointer;
+    background-color: rgba(255, 255, 255, 0.1);
 }
 
-.ps-button{
-    padding: 5px;
-    padding-left: 20px;
-    padding-right: 20px;
+.ps-button {
+    padding: 8px 25px;
     font-size: 15px;
 }
 
 
-.previewImage{
+.previewImage {
     position: relative;
 }
 
-.previewImage > svg{
+.previewImage > svg {
     position: absolute;
     right: 1rem;
     top: 0.5rem;
     cursor: pointer;
+    color: rgba(255, 255, 255, 0.8);
+    transition: transform 0.2s ease;
 }
 
-.previewImage > img{
+.previewImage > svg:hover {
+    transform: scale(1.1);
+}
+
+.previewImage > img {
     width: 100%;
     height: 20rem;
     object-fit: cover;

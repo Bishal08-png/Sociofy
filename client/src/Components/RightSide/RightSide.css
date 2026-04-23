@@ -1,28 +1,96 @@
-.RightSide{
+.RightSide {
     display: flex;
     flex-direction: column;
-    gap: 2rem;
+    gap: 1.5rem;
+    position: sticky;
+    top: 1rem;
+    height: calc(100vh - 2rem);
 }
 
-.navIcons{
-    margin-top: 1rem;
+/* ─── Nav Icons Bar ─── */
+.navIcons {
     display: flex;
+    align-items: center;
     justify-content: space-between;
+    background: var(--cardColor);
+    border: var(--glassBorder);
+    border-radius: 1rem;
+    padding: 0.75rem 1.25rem;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
-.navIcons > img {
-    width: 1.5rem;
-    height: 1.5rem;
+.nav-icon {
+    font-size: 1.8rem !important; /* Larger size for visibility */
+    color: rgba(167, 139, 250, 0.7); /* Violet tint by default */
+    transition: all 0.3s ease !important;
+    cursor: pointer;
 }
 
-.navIcons > a > img {
-    width: 2rem;
-    height: 2rem;
+.nav-icon:hover {
+    color: var(--black);
+    transform: scale(1.2) translateY(-2px);
+    filter: drop-shadow(0 0 8px rgba(167, 139, 250, 0.6));
 }
 
-.rg-button{
+/* Specific color for each icon on hover if desired, or keep uniform */
+.navIcons a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+}
+
+/* ─── Share Button ─── */
+.rg-button {
     height: 3rem;
-    width: 80%;
+    width: 100%;
     align-self: center;
+    border-radius: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+    font-size: 1rem;
 }
 
+/* ── TABLET ── */
+@media (max-width: 1024px) {
+    .RightSide {
+        display: none;
+    }
+}
+
+/* ── MOBILE ── */
+@media (max-width: 768px) {
+    .RightSide {
+        display: block;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: auto;
+        z-index: 100;
+        background: rgba(15, 17, 26, 0.95);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border-top: var(--glassBorder);
+        padding: 0.5rem 1.5rem;
+        box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.4);
+    }
+
+    .navIcons {
+        background: transparent;
+        border: none;
+        box-shadow: none;
+        padding: 0.25rem 0;
+        backdrop-filter: none;
+    }
+
+    .nav-icon {
+        font-size: 1.8rem !important;
+        color: rgba(255, 255, 255, 0.6);
+    }
+
+    .rg-button {
+        display: none;
+    }
+}

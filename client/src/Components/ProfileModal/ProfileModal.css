@@ -1,0 +1,116 @@
+/* MAIN FORM */
+.infoForm {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 1.5rem;
+    max-height: 80vh;
+    overflow-y: auto;
+    justify-content: center;
+}
+
+/* TITLE */
+.infoForm h3 {
+    text-align: center;
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: #ffffff;
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* EACH INPUT GROUP */
+.infoForm>div {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+/* SINGLE INPUT FULL WIDTH */
+.infoForm>div:has(input:only-child) {
+    grid-template-columns: 1fr;
+}
+
+/* INPUT STYLE */
+.infoInput {
+    width: 100%;
+    padding: 12px 14px;
+
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+
+    background: rgba(255, 255, 255, 0.05);
+    color: #ffffff;
+
+    font-size: 0.95rem;
+    outline: none;
+
+    transition: all 0.25s ease;
+}
+
+/* PLACEHOLDER */
+.infoInput::placeholder {
+    color: rgba(255, 255, 255, 0.45);
+}
+
+/* FOCUS EFFECT */
+.infoInput:focus {
+    border: 1px solid #7b2ff7;
+    background: rgba(255, 255, 255, 0.08);
+    box-shadow: 0 0 10px rgba(123, 47, 247, 0.4);
+}
+
+/* FILE UPLOAD LABEL */
+.file-upload-label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+    border: 2px dashed rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.05);
+    color: rgba(255, 255, 255, 0.8);
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: center;
+    min-height: 100px;
+}
+
+.file-upload-label:hover {
+    border-color: #7b2ff7;
+    background: rgba(123, 47, 247, 0.1);
+    color: #ffffff;
+}
+
+/* BUTTON */
+.infoButton {
+    margin-top: 1rem;
+    height: 2.6rem;
+
+    border-radius: 10px;
+    border: none;
+
+    background: linear-gradient(135deg, #7b2ff7, #f107a3);
+    color: #ffffff;
+
+    font-weight: 600;
+    letter-spacing: 0.3px;
+
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+/* BUTTON HOVER */
+.infoButton:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(123, 47, 247, 0.4);
+}
+
+/* RESPONSIVE */
+@media (max-width: 600px) {
+    .infoForm>div {
+        grid-template-columns: 1fr;
+    }
+}

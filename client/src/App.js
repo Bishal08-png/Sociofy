@@ -3,6 +3,7 @@ import './App.css';
 import Auth from './Pages/auth/Auth';
 import Home from './Pages/home/Home';
 import Profile from './Pages/profile/Profile';
+import Chat from './Pages/Chat/Chat';
 import { Routes, Route, Navigate } from 'react-router-dom';
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
         <Route path='/home' element={user ? <Home /> : <Navigate to='../auth' />} />
         <Route path='/auth' element={user ? <Navigate to='../home' /> : <Auth />} />
         <Route path='/profile/:id' element={user ? <Profile /> : <Navigate to='../auth' />} />
+        <Route path='/chat' element={user ? <Chat /> : <Navigate to='../auth' />} />
       </Routes>
 
     </div>

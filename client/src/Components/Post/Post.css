@@ -1,21 +1,151 @@
-.Post{
+.Post {
     display: flex;
     flex-direction: column;
     padding: 1rem;
-    background-color: var(--cardColor);
+    background: var(--cardColor);
     border-radius: 1rem;
     gap: 1rem;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: var(--glassBorder);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.Post > img{
+.Post:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+}
+
+.postHeader {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.deletePostBtn {
+    margin-left: auto;
+    cursor: pointer;
+    color: var(--gray);
+    display: flex;
+    align-items: center;
+    padding: 5px;
+    border-radius: 50%;
+    transition: color 0.2s ease, background 0.2s ease;
+}
+
+.deletePostBtn:hover {
+    color: #ff5b5b;
+    background: rgba(255, 91, 91, 0.1);
+}
+
+.postAuthorAvatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--glassBorder);
+}
+
+.postAuthorInfo {
+    display: flex;
+    flex-direction: column;
+}
+
+.postAuthorName {
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: var(--black);
+}
+
+.Post>img {
     width: 100%;
     max-height: 20rem;
     object-fit: cover;
     border-radius: 0.5rem;
 }
 
-.postReact{
-   display: flex;
-   align-items: flex-start;
-   gap: 1.5rem;
+.postReact {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.5rem;
+}
+
+.postReact>img {
+    transition: transform 0.2s ease;
+}
+
+.postReact>img:hover {
+    transform: scale(1.2);
+}
+
+.detail>span:nth-of-type(1) {
+    color: var(--black);
+    margin-right: 1rem;
+}
+
+.detail>span:nth-of-type(2) {
+    color: var(--black);
+}
+
+.commentsSection {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.commentsList {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-height: 150px;
+    overflow-y: scroll;
+}
+
+.commentItem {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+}
+
+.commentAvatar {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.commentBody {
+    display: flex;
+    flex-direction: column;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 6px 10px;
+    border-radius: 10px;
+    font-size: 13px;
+    color: var(--black);
+}
+
+.commentInputContainer {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.commentInput {
+    flex: 1;
+    padding: 8px 12px;
+    border-radius: 20px;
+    border: none;
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--black);
+    outline: none;
+}
+
+.commentButton {
+    height: 100%;
+    padding: 8px 15px;
+    font-size: 12px;
 }

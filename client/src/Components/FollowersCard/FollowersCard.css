@@ -1,42 +1,103 @@
-.FollowersCard{
+.FollowersCard {
     width: 100%;
-    border-radius: 0.7rem;
+    box-sizing: border-box;
+    /* ADDED: Keeps the padding inside the 100% width so it doesn't break out of the sidebar */
+    border-radius: 1.5rem;
     gap: 1rem;
     display: flex;
     flex-direction: column;
     font-size: 15px;
+    background-color: var(--cardColor);
+    padding: 1.5rem;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: var(--glassBorder);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
-.follower{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.follower > div{
-    display: flex;
-    gap: 10px;
-}
-
-.followerImg{
-    width: 3.2rem;
-    height: 3.2rem;
-    border-radius: 50%;
-}
-
-.name{
-    display: flex;
-    flex-direction: column;
-    align-items: self-start;
-    justify-content: center;
-}
-
-.name > span:nth-of-type(1){
+.FollowersCard>h3 {
+    margin-bottom: 0.5rem;
+    color: var(--black);
     font-weight: bold;
 }
 
-.fc-button{
+.follower {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: transform 0.2s ease;
+    gap: 1rem;
+    /* ADDED: Ensures a minimum gap between the profile info and the button */
+}
+
+.follower:hover {
+    transform: scale(1.02);
+}
+
+.follower>div {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    flex: 1;
+    /* ADDED: Tells the profile info to take up available space... */
+    min-width: 0;
+    /* ADDED: ...but allows it to shrink so long text truncates instead of pushing the button */
+}
+
+.followerImg {
+    width: 3.2rem;
+    height: 3.2rem;
+    border-radius: 50%;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    flex-shrink: 0;
+    /* ADDED: Prevents the image from turning into an oval if space is tight */
+    object-fit: cover;
+    /* ADDED: Ensures the image fills the circle without distortion */
+}
+
+.name {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    min-width: 0;
+    /* ADDED: Crucial for text truncation to work */
+    width: 100%;
+}
+
+.name>span:nth-of-type(1) {
+    font-weight: bold;
+    color: var(--black);
+    width: 100%;
+    white-space: nowrap;
+    /* ADDED: Prevents name from wrapping to two lines */
+    overflow: hidden;
+    /* ADDED: Hides overflowing text */
+    text-overflow: ellipsis;
+    /* ADDED: Adds "..." if the name is too long */
+}
+
+.name>span:nth-of-type(2) {
+    color: var(--gray);
+    font-size: 0.85rem;
+    width: 100%;
+    white-space: nowrap;
+    /* ADDED: Prevents username from wrapping */
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.fc-button {
     height: 2rem;
-    padding-left: 15px;
-    padding-right: 15px;
+    padding-left: 10px;
+    padding-right: 10px;
+    font-size: 0.9rem;
+
+    /* ADDED: These 3 lines perfectly center the "Unfollow" text inside the button */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    /* ADDED: Prevents the button from shrinking or stretching weirdly */
+    flex-shrink: 0;
 }

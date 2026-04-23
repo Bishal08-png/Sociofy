@@ -1,9 +1,6 @@
 import React, { useState, useRef } from 'react'
 import './PostShare.css';
 import PhotoOutlinedIcon from '@mui/icons-material/PhotoOutlined';
-import PlayCircleOutlineIcon from '@mui/icons-material/PlayCircleOutline';
-import LocationOnOutlinedIcon from '@mui/icons-material/LocationOnOutlined';
-import CalendarMonthOutlinedIcon from '@mui/icons-material/CalendarMonthOutlined';
 import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
 import { useDispatch, useSelector } from 'react-redux';
 import { uploadImage, uploadPost } from '../../actions/UploadAction';
@@ -75,24 +72,13 @@ const PostShare = () => {
 
                 <div className="postOptions">
 
-                    <div className="option" style={{ color: "var(--photo)" }}
-                        onClick={() => imageRef.current.click()}
-                    >
-                        <PhotoOutlinedIcon />
-                        Photo
-                    </div>
-
-                    <div className="option" style={{ color: "var(--video)" }}>
-                        <PlayCircleOutlineIcon />
-                        Video
-                    </div>
-                    <div className="option" style={{ color: "var(--location)" }}>
-                        <LocationOnOutlinedIcon />
-                        Location
-                    </div>
-                    <div className="option" style={{ color: "var(--shedule)" }}>
-                        <CalendarMonthOutlinedIcon />
-                        Shedule
+                    <div className="postIcons">
+                        <div className="option" style={{ color: "var(--photo)" }}
+                            onClick={() => imageRef.current.click()}
+                        >
+                            <PhotoOutlinedIcon />
+                            Photo
+                        </div>
                     </div>
 
                     <button className='button ps-button' onClick={handleSubmit} disabled={loading}>

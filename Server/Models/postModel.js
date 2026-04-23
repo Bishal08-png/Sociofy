@@ -5,7 +5,10 @@ const postSchema = mongoose.Schema(
         userId: { type: String, required: true },
         desc: String,
         likes: [],
-        image: String
+        comments: { type: Array, default: [] },
+        image: String,
+        name: String,
+        profilePicture: String
     },
     {
         timestamps: true,

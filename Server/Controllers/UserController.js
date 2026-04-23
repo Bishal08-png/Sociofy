@@ -115,8 +115,8 @@ export const followUser = async (req, res) => {
             const followingUser = await UserModel.findById(_id);
 
             if (!followUser.followers.includes(_id)) {
-                await followUser.updateOne({ $push: { followers: _id } })
-                await followingUser.updateOne({ $push: { following: id } })
+                await followUser.updateOne({ $addToSet: { followers: _id } })
+                await followingUser.updateOne({ $addToSet: { following: id } })
 
                 res.status(200).json("User Followed!")
             } else {
