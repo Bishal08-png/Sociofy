@@ -6,6 +6,7 @@ import { userChats } from "../../api/ChatRequest";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import { io } from "socket.io-client";
+import { API_BASE_URL, PUBLIC_FOLDER } from "../../api/config";
 
 const Chat = () => {
   const socket = useRef();
@@ -50,9 +51,7 @@ const Chat = () => {
             const otherId = chat.members.find((id) => id !== user._id);
             if (otherId) {
               try {
-                const { data: otherUser } = await axios.get(
-                  `http://localhost:4000/user/${otherId}`
-                );
+                const { data: otherUser } = await axios.get(`${API_BASE_URL}/user/${otherId}`);
                 userMap[chat._id] = otherUser;
               } catch (e) {
                 console.log(e);
@@ -70,7 +69,7 @@ const Chat = () => {
 
   // Connect to Socket.io
   useEffect(() => {
-    socket.current = io("http://localhost:4000");
+    socket.current = io(API_BASE_URL);
     socket.current.emit("new-user-add", user._id);
     socket.current.on("get-users", (users) => {
       setOnlineUsers(users);
@@ -91,7 +90,7 @@ const Chat = () => {
     });
   }, []);
 
-  const serverPublic = process.env.REACT_APP_PUBLIC_FOLDER;
+  const serverPublic = PUBLIC_FOLDER;
 
   return (
     <div className="Chat">

@@ -5,13 +5,14 @@ import { Link, useParams } from 'react-router-dom';
 import ProfileModal from '../ProfileModal/ProfileModal';
 import * as UserApi from '../../api/UserRequest.js';
 import { followUser, unFollowUser } from '../../actions/UserAction';
+import { PUBLIC_FOLDER } from '../../api/config';
 
 
 const ProfileCard = ({ location }) => {
 
     const { user } = useSelector((state) => state.authReducer.authData);
     const posts = useSelector((state) => state.postReducer.posts);
-    const serverPublic = process.env.REACT_APP_PUBLIC_FOLDER;
+    const serverPublic = PUBLIC_FOLDER;
     const dispatch = useDispatch();
     
     const [modalOpened, setModalOpened] = useState(false);

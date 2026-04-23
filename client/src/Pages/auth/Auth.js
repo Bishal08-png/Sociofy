@@ -68,12 +68,12 @@ const Auth = () => {
         <div className='Auth'>
             <div className="a-left">
                 <div className="auth-brand">
-                    <img src={Logo} alt="Sociofy Logo" className="auth-brand-logo" />
-                    <span className="auth-brand-name">Sociofy</span>
+                    <img src={Logo} alt="Bishal Social Logo" className="auth-brand-logo" />
+                    <span className="auth-brand-name">Bishal Social</span>
                 </div>
                 <div className="Webname">
                     <h2>Welcome!</h2>
-                    <h5>Connect, share and explore ideas <br /> throughout the world.</h5>
+                    <h5>My MERN social space to connect, share, and chat.</h5>
                 </div>
             </div>
 

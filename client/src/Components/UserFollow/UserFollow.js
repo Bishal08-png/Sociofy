@@ -4,6 +4,7 @@ import { followUser, unFollowUser } from '../../actions/UserAction';
 import { createChat } from '../../api/ChatRequest';
 import { useNavigate } from 'react-router-dom';
 import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
+import { PUBLIC_FOLDER } from '../../api/config';
 
 
 
@@ -17,7 +18,7 @@ const UserFollow = ({ person }) => {
     const isFollowing = user.following?.includes(person._id) || false;
     const [messaging, setMessaging] = useState(false);
 
-    const serverPublic = process.env.REACT_APP_PUBLIC_FOLDER;
+    const serverPublic = PUBLIC_FOLDER;
 
 
     const handleFollow = () => {

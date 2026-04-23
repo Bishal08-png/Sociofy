@@ -8,6 +8,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { likePost, addComment } from '../../api/PostRequest';
 import { deletePost } from '../../actions/PostAction';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
+import { PUBLIC_FOLDER } from '../../api/config';
 
 const Post = ({ data }) => {
 
@@ -18,7 +19,7 @@ const Post = ({ data }) => {
   const [comments, setComments] = useState(data.comments || [])
   const [showComments, setShowComments] = useState(false)
   const [commentText, setCommentText] = useState("")
-  const serverPublic = process.env.REACT_APP_PUBLIC_FOLDER;
+  const serverPublic = PUBLIC_FOLDER;
   const isOwner = user._id === data.userId;
 
   const handleLike = () => {

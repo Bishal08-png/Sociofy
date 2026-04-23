@@ -1,13 +1,14 @@
 {
-  "name": "server",
+  "name": "bishal-social-server",
   "version": "1.0.0",
-  "description": "",
+  "description": "Backend API for Bishal Social.",
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "start": "nodemon index.js"
+    "start": "node index.js",
+    "dev": "nodemon index.js"
   },
-  "author": "",
+  "author": "Bishal Dasgupta",
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.1.0",

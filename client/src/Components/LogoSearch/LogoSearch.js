@@ -4,6 +4,7 @@ import Logo from '../../Img/logo.png';
 import SearchIcon from '@mui/icons-material/Search';
 import { getAllUser } from '../../api/UserRequest';
 import { Link } from 'react-router-dom';
+import { PUBLIC_FOLDER } from '../../api/config';
 
 const LogoSearch = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -11,7 +12,7 @@ const LogoSearch = () => {
   const [dropdownVisible, setDropdownVisible] = useState(false);
   const searchRef = useRef(null);
 
-  const serverPublic = process.env.REACT_APP_PUBLIC_FOLDER;
+  const serverPublic = PUBLIC_FOLDER;
 
   const handleSearch = async () => {
     if (searchQuery.trim() === "") {
@@ -57,8 +58,8 @@ const LogoSearch = () => {
     <div className='LogoSearch' ref={searchRef}>
 
       <div className="brand">
-        <img src={Logo} alt="Sociofy" className="brandLogo" />
-        <span className="brandName">Sociofy</span>
+        <img src={Logo} alt="Bishal Social" className="brandLogo" />
+        <span className="brandName">Bishal Social</span>
       </div>
 
       <div className="Search" style={{ position: 'relative' }}>

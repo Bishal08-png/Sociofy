@@ -1,7 +1,6 @@
 import { Modal, useMantineTheme } from '@mantine/core';
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
 import { uploadImage } from '../../actions/UploadAction';
 import { updateUser } from '../../actions/UserAction';
 import './ProfileModal.css';

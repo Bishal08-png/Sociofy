@@ -2,6 +2,7 @@ import React, { useEffect, useState, useRef } from "react";
 import { addMessage, getMessages } from "../../api/MessageRequest";
 import axios from "axios";
 import "./ChatBox.css";
+import { API_BASE_URL, PUBLIC_FOLDER } from "../../api/config";
 
 const ChatBox = ({ chat, currentUser, setSendMessage, receivedMessage, setCurrentChat, chatUser }) => {
   const [messages, setMessages] = useState([]);
@@ -10,7 +11,6 @@ const ChatBox = ({ chat, currentUser, setSendMessage, receivedMessage, setCurren
   const scroll = useRef();
   const imageRef = useRef();
 
-  // fetching data for messages
   useEffect(() => {
     const fetchMessages = async () => {
       try {
@@ -20,21 +20,19 @@ const ChatBox = ({ chat, currentUser, setSendMessage, receivedMessage, setCurren
         console.log(error);
       }
     };
+
     if (chat !== null) fetchMessages();
   }, [chat]);
 
-  // Always scroll to last Message
   useEffect(() => {
     scroll.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
 
-  // Receive Message from parent component
   useEffect(() => {
-    console.log("Message Arrived: ", receivedMessage);
     if (receivedMessage !== null && receivedMessage.chatId === chat?._id) {
-      setMessages([...messages, receivedMessage]);
+      setMessages((currentMessages) => [...currentMessages, receivedMessage]);
     }
-  }, [receivedMessage]);
+  }, [chat?._id, receivedMessage]);
 
   const handleChange = (newMessage) => {
     setNewMessage(newMessage);
@@ -42,24 +40,22 @@ const ChatBox = ({ chat, currentUser, setSendMessage, receivedMessage, setCurren
 
   const onImageChange = (event) => {
     if (event.target.files && event.target.files[0]) {
-      let img = event.target.files[0];
-      setImage(img);
+      setImage(event.target.files[0]);
     }
   };
 
-  // Send Message
   const handleSend = async (e) => {
     e.preventDefault();
-    
-    // image upload
+
     let imageUrl = "";
     if (image) {
       const data = new FormData();
       const fileName = Date.now() + image.name;
       data.append("name", fileName);
       data.append("file", image);
+
       try {
-        await axios.post("http://localhost:4000/upload", data);
+        await axios.post(`${API_BASE_URL}/upload`, data);
         imageUrl = fileName;
       } catch (err) {
         console.log(err);
@@ -74,14 +70,11 @@ const ChatBox = ({ chat, currentUser, setSendMessage, receivedMessage, setCurren
     };
 
     const receiverId = chat.members.find((id) => id !== currentUser);
-    
-    // send message to socket server
     setSendMessage({ ...message, receiverId });
-    
-    // send message to database
+
     try {
       const { data } = await addMessage(message);
-      setMessages([...messages, data]);
+      setMessages((currentMessages) => [...currentMessages, data]);
       setNewMessage("");
       setImage(null);
     } catch (error) {
@@ -94,21 +87,21 @@ const ChatBox = ({ chat, currentUser, setSendMessage, receivedMessage, setCurren
       {chat ? (
         <>
           <div className="chat-header">
-            <div className="follower" style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
-              <span 
-                onClick={() => setCurrentChat(null)} 
-                style={{ cursor: 'pointer', fontSize: '1.5rem', padding: '5px' }}
+            <div className="follower" style={{ display: "flex", alignItems: "center", gap: "15px" }}>
+              <span
+                onClick={() => setCurrentChat(null)}
+                style={{ cursor: "pointer", fontSize: "1rem", padding: "5px" }}
                 title="Back to chats"
               >
-                ⬅️
+                Back
               </span>
               {chatUser && (
                 <>
-                  <img 
-                    src={chatUser.profilePicture ? process.env.REACT_APP_PUBLIC_FOLDER + chatUser.profilePicture : process.env.REACT_APP_PUBLIC_FOLDER + "defaultProfile.png"} 
-                    alt="Profile" 
-                    className="followerImage" 
-                    style={{ width: '45px', height: '45px', borderRadius: '50%', objectFit: 'cover', border: '2px solid rgba(255,255,255,0.1)' }} 
+                  <img
+                    src={chatUser.profilePicture ? PUBLIC_FOLDER + chatUser.profilePicture : PUBLIC_FOLDER + "defaultProfile.png"}
+                    alt="Profile"
+                    className="followerImage"
+                    style={{ width: "45px", height: "45px", borderRadius: "50%", objectFit: "cover", border: "2px solid rgba(255,255,255,0.1)" }}
                   />
                   <div className="name" style={{ fontSize: "1.1rem", fontWeight: "600" }}>
                     <span>{chatUser.firstname} {chatUser.lastname}</span>
@@ -124,21 +117,17 @@ const ChatBox = ({ chat, currentUser, setSendMessage, receivedMessage, setCurren
               <div
                 ref={scroll}
                 key={message._id}
-                className={
-                  message.senderId === currentUser
-                    ? "message own"
-                    : "message"
-                }
+                className={message.senderId === currentUser ? "message own" : "message"}
               >
                 <span>{message.text}</span>
                 {message.image && (
-                   <img src={`http://localhost:4000/images/${message.image}`} alt="attached" className="message-image" />
+                  <img src={`${PUBLIC_FOLDER}${message.image}`} alt="attached" className="message-image" />
                 )}
                 <span>{new Date(message.createdAt).toLocaleTimeString()}</span>
               </div>
             ))}
           </div>
-          
+
           <div className="chat-sender">
             <div onClick={() => imageRef.current.click()}>+ Photo</div>
             <input

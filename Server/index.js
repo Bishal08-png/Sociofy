@@ -11,14 +11,27 @@ import ChatRoute from './Routes/ChatRoute.js';
 import MessageRoute from './Routes/MessageRoute.js';
 import { Server } from 'socket.io';
 import http from 'http';
+import fs from 'fs';
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+dotenv.config();
 
 // Routes
 const app = express();
 const httpServer = http.createServer(app);
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const clientBuildPath = path.resolve(__dirname, '..', 'client', 'build');
+const port = process.env.PORT || 4000;
+const allowedOrigins = (process.env.CLIENT_URL || 'http://localhost:3000,http://localhost:4000')
+    .split(',')
+    .map((origin) => origin.trim())
+    .filter(Boolean);
 
 const io = new Server(httpServer, {
     cors: {
-        origin: "http://localhost:3000"
+        origin: allowedOrigins
     }
 });
 
@@ -31,14 +44,21 @@ app.use('/images', express.static('public/images'));
 // MiddleWare
 app.use(bodyParser.json({ limit: "30mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
-app.use(cors());
+app.use(cors({
+    origin: (origin, callback) => {
+        if (!origin || allowedOrigins.includes(origin)) {
+            callback(null, true);
+            return;
+        }
 
-dotenv.config();
+        callback(new Error('Not allowed by CORS'));
+    }
+}));
 
 mongoose.connect
     (process.env.MONGO_DB, { useNewUrlParser: true, useUnifiedTopology: true }
     ).then(() =>
-        httpServer.listen(process.env.PORT, () => console.log(`listening at ${process.env.PORT}`))
+        httpServer.listen(port, () => console.log(`listening at ${port}`))
     ).catch((error) =>
         console.error(error)
     )
@@ -76,3 +96,10 @@ app.use('/post', PostRoute);
 app.use('/upload', UploadRoute);
 app.use('/chat', ChatRoute);
 app.use('/message', MessageRoute);
+
+if (fs.existsSync(clientBuildPath)) {
+    app.use(express.static(clientBuildPath));
+    app.get('*', (req, res) => {
+        res.sendFile(path.join(clientBuildPath, 'index.html'));
+    });
+}

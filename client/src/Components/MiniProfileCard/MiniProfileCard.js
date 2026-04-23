@@ -2,10 +2,11 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import './MiniProfileCard.css';
+import { PUBLIC_FOLDER } from '../../api/config';
 
 const MiniProfileCard = () => {
     const { user } = useSelector((state) => state.authReducer.authData);
-    const serverPublic = process.env.REACT_APP_PUBLIC_FOLDER;
+    const serverPublic = PUBLIC_FOLDER;
 
     return (
         <div className="MiniProfileCard">
