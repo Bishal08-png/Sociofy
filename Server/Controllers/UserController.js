@@ -2,6 +2,12 @@ import UserModel from "../Models/userModel.js";
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 
+const sanitizeUser = (user) => {
+    const userObject = user.toObject ? user.toObject() : { ...user };
+    delete userObject.password;
+    return userObject;
+};
+
 
 // get All users
 export const getAllUsers = async (req, res) => {
@@ -59,6 +65,10 @@ export const updateUser = async (req, res) => {
             req.body.password = await bcrypt.hash(pass, salt)
         }
 
+        if (req.body.email) {
+            req.body.email = req.body.email.trim().toLowerCase();
+        }
+
         try {
             const user = await UserModel.findByIdAndUpdate(id, req.body, { new: true });
 
@@ -67,7 +77,7 @@ export const updateUser = async (req, res) => {
                 process.env.JWT_KEY
             );
 
-            res.status(200).json({ user, token })
+            res.status(200).json({ user: sanitizeUser(user), token })
         } catch (error) {
             res.status(500).json(error)
         }

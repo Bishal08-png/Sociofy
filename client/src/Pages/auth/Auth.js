@@ -25,11 +25,12 @@ const Auth = () => {
     const handlSubmit = async (e) => {
         e.preventDefault();
         setErrorMessage('');
+        const authData = { ...data, email: data.email.trim().toLowerCase() };
 
         if (isSignUp) {
             if (data.password === data.confirmpass) {
                 try {
-                    await dispatch(signUp(data));
+                    await dispatch(signUp(authData));
                 } catch (err) {
                     setErrorMessage(err.response?.data?.message || err.response?.data || "Signup failed. Please try again.");
                 }
@@ -38,7 +39,7 @@ const Auth = () => {
             }
         } else {
             try {
-                await dispatch(logIn(data));
+                await dispatch(logIn(authData));
             } catch (err) {
                 setErrorMessage(err.response?.data?.message || err.response?.data || "Invalid email or password.");
             }
@@ -101,10 +102,16 @@ const Auth = () => {
                     }
 
                     <div>
-                        <input type="text" placeholder='Email'
+                        <input
+                            type="email"
+                            placeholder='Email'
                             className='infoInput' name='email'
                             onChange={handleChange}
                             value={data.email}
+                            autoComplete='email'
+                            autoCapitalize='none'
+                            autoCorrect='off'
+                            inputMode='email'
                         />
                     </div>
 
@@ -113,12 +120,14 @@ const Auth = () => {
                             className='infoInput' name='password'
                             onChange={handleChange}
                             value={data.password}
+                            autoComplete={isSignUp ? 'new-password' : 'current-password'}
                         />
                         {isSignUp &&
                             <input type="password" placeholder='Confirm Password'
                                 className='infoInput' name='confirmpass'
                                 onChange={handleChange}
                                 value={data.confirmpass}
+                                autoComplete='new-password'
                             />
                         }
                     </div>
