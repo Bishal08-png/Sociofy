@@ -16,8 +16,18 @@ const Auth = () => {
 
     const [confirmPass, setConfirmPass] = useState(true);
 
+    const getAuthErrorMessage = (err, fallbackMessage) => {
+        if (err.response?.data?.message) return err.response.data.message;
+        if (typeof err.response?.data === 'string') return err.response.data;
+        if (err.message === 'Network Error') {
+            return "Cannot reach the server. Check your internet connection or backend URL.";
+        }
+        return fallbackMessage;
+    };
+
     const handleChange = (e) => {
         setErrorMessage('');
+        setConfirmPass(true);
         setData({ ...data, [e.target.name]: e.target.value })
     }
 
@@ -25,14 +35,31 @@ const Auth = () => {
     const handlSubmit = async (e) => {
         e.preventDefault();
         setErrorMessage('');
-        const authData = { ...data, email: data.email.trim().toLowerCase() };
+        setConfirmPass(true);
+
+        const authData = {
+            ...data,
+            firstname: data.firstname.trim(),
+            lastname: data.lastname.trim(),
+            email: data.email.trim().toLowerCase(),
+        };
+
+        if (!authData.email || !authData.password || (isSignUp && (!authData.firstname || !authData.lastname))) {
+            setErrorMessage("Please fill all required fields.");
+            return;
+        }
+
+        if (isSignUp && authData.password.length < 6) {
+            setErrorMessage("Password must be at least 6 characters.");
+            return;
+        }
 
         if (isSignUp) {
-            if (data.password === data.confirmpass) {
+            if (authData.password === data.confirmpass) {
                 try {
                     await dispatch(signUp(authData));
                 } catch (err) {
-                    setErrorMessage(err.response?.data?.message || err.response?.data || "Signup failed. Please try again.");
+                    setErrorMessage(getAuthErrorMessage(err, "Signup failed. Please try again."));
                 }
             } else {
                 setConfirmPass(false);
@@ -41,7 +68,7 @@ const Auth = () => {
             try {
                 await dispatch(logIn(authData));
             } catch (err) {
-                setErrorMessage(err.response?.data?.message || err.response?.data || "Invalid email or password.");
+                setErrorMessage(getAuthErrorMessage(err, "Invalid email or password."));
             }
         }
     }
@@ -92,11 +119,13 @@ const Auth = () => {
                                 className='infoInput' name='firstname'
                                 onChange={handleChange}
                                 value={data.firstname}
+                                autoComplete='given-name'
                             />
                             <input type="text" placeholder='Last Name'
                                 className='infoInput' name='lastname'
                                 onChange={handleChange}
                                 value={data.lastname}
+                                autoComplete='family-name'
                             />
                         </div>
                     }

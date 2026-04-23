@@ -13,10 +13,18 @@ const sanitizeUser = (user) => {
 // register new users
 export const registerUser = async (req, res) => {
 
-    const { email, password } = req.body;
+    const { email, password, firstname, lastname } = req.body;
     const normalizedEmail = normalizeEmail(email);
 
     try {
+        if (!firstname?.trim() || !lastname?.trim() || !normalizedEmail || !password) {
+            return res.status(400).json({ message: "Please fill all required fields." });
+        }
+
+        if (password.toString().length < 6) {
+            return res.status(400).json({ message: "Password must be at least 6 characters." });
+        }
+
         const oldUser = await UserModel.findOne({ email: normalizedEmail });
 
         if (oldUser) {
@@ -26,6 +34,8 @@ export const registerUser = async (req, res) => {
         const hashedPass = await bcrypt.hash(password.toString(), 10);
         req.body.password = hashedPass;
         req.body.email = normalizedEmail;
+        req.body.firstname = firstname.trim();
+        req.body.lastname = lastname.trim();
 
         const newUser = new UserModel(req.body);
 
@@ -47,6 +57,10 @@ export const loginUser = async (req, res) => {
     const normalizedEmail = normalizeEmail(email);
 
     try {
+        if (!normalizedEmail || !password) {
+            return res.status(400).json({ message: "Email and password are required." });
+        }
+
         const user = await UserModel.findOne({ email: normalizedEmail });
 
         if (user) {
