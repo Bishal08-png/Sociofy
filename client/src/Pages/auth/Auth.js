@@ -3,6 +3,7 @@ import './Auth.css';
 import Logo from '../../Img/logo.png';
 import { useDispatch, useSelector } from 'react-redux';
 import { logIn, signUp } from '../../actions/AuthAction.js';
+import { API_BASE_URL } from '../../api/config.js';
 
 
 const Auth = () => {
@@ -20,7 +21,7 @@ const Auth = () => {
         if (err.response?.data?.message) return err.response.data.message;
         if (typeof err.response?.data === 'string') return err.response.data;
         if (err.message === 'Network Error') {
-            return "Cannot reach the server. Check your internet connection or backend URL.";
+            return `Cannot reach the server at ${API_BASE_URL}. Check your backend deployment URL.`;
         }
         return fallbackMessage;
     };
