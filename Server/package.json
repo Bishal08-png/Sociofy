@@ -1,7 +1,7 @@
 {
-  "name": "bishal-social-server",
+  "name": "sociofy-server",
   "version": "1.0.0",
-  "description": "Backend API for Bishal Social.",
+  "description": "Backend API for Sociofy.",
   "main": "index.js",
   "type": "module",
   "scripts": {

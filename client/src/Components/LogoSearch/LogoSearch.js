@@ -58,8 +58,8 @@ const LogoSearch = () => {
     <div className='LogoSearch' ref={searchRef}>
 
       <div className="brand">
-        <img src={Logo} alt="Bishal Social" className="brandLogo" />
-        <span className="brandName">Bishal Social</span>
+        <img src={Logo} alt="Sociofy" className="brandLogo" />
+        <span className="brandName">Sociofy</span>
       </div>
 
       <div className="Search" style={{ position: 'relative' }}>

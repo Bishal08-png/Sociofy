@@ -68,8 +68,8 @@ const Auth = () => {
         <div className='Auth'>
             <div className="a-left">
                 <div className="auth-brand">
-                    <img src={Logo} alt="Bishal Social Logo" className="auth-brand-logo" />
-                    <span className="auth-brand-name">Bishal Social</span>
+                    <img src={Logo} alt="Sociofy Logo" className="auth-brand-logo" />
+                    <span className="auth-brand-name">Sociofy</span>
                 </div>
                 <div className="Webname">
                     <h2>Welcome!</h2>

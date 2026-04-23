@@ -1,6 +1,6 @@
-# Bishal Social Client
+# Sociofy Client
 
-React frontend for Bishal Social.
+React frontend for Sociofy.
 
 ## Scripts
 

@@ -1,6 +1,6 @@
-# Bishal Social
+# Sociofy
 
-Bishal Social is my full-stack social media web app built with the MERN stack.
+Sociofy is my full-stack social media web app built with the MERN stack.
 It includes authentication, profiles, image posts, comments, likes, following,
 real-time chat, online presence, and chat image sharing.
 
