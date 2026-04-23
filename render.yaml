@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: sociofy-api
+    runtime: node
+    plan: free
+    buildCommand: cd Server && npm install
+    startCommand: cd Server && npm start
+    healthCheckPath: /health
+    envVars:
+      - key: MONGO_DB
+        sync: false
+      - key: JWT_KEY
+        sync: false
+      - key: CLIENT_URL
+        sync: false
