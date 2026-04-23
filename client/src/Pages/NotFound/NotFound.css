@@ -1,0 +1,190 @@
+/* ─── Layout ─────────────────────────────────────────────── */
+.nf-container {
+    position: relative;
+    min-height: 100vh;
+    width: 100%;
+    background: #0a0a14;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    font-family: 'Inter', 'Segoe UI', sans-serif;
+    color: #e2e8f0;
+}
+
+/* ─── Starfield ───────────────────────────────────────────── */
+.nf-stars {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.nf-star {
+    position: absolute;
+    border-radius: 50%;
+    background: white;
+    animation: nf-twinkle 3s ease-in-out infinite alternate;
+}
+
+@keyframes nf-twinkle {
+    0%   { opacity: 0.2; transform: scale(0.8); }
+    100% { opacity: 1;   transform: scale(1.2); }
+}
+
+/* ─── Floating astronaut ──────────────────────────────────── */
+.nf-astronaut {
+    position: relative;
+    z-index: 1;
+    animation: nf-levitate 5s ease-in-out infinite;
+    margin-bottom: -1rem;
+}
+
+.nf-astronaut-svg {
+    width: 180px;
+    height: 200px;
+    filter: drop-shadow(0 0 20px rgba(167, 139, 250, 0.5))
+            drop-shadow(0 0 40px rgba(96, 165, 250, 0.2));
+}
+
+@keyframes nf-levitate {
+    0%, 100% { transform: translateY(0)    rotate(-2deg); }
+    50%       { transform: translateY(-28px) rotate(2deg); }
+}
+
+/* ─── Main content ────────────────────────────────────────── */
+.nf-content {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    text-align: center;
+    padding: 0 1.5rem;
+    animation: nf-fadein 0.8s ease both;
+}
+
+@keyframes nf-fadein {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ─── 404 number ──────────────────────────────────────────── */
+.nf-404 {
+    font-size: clamp(6rem, 18vw, 11rem);
+    font-weight: 900;
+    line-height: 1;
+    margin: 0;
+    background: linear-gradient(135deg, #a78bfa 0%, #60a5fa 50%, #f0abfc 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: -4px;
+    animation: nf-glow-pulse 3s ease-in-out infinite;
+    filter: drop-shadow(0 0 30px rgba(167, 139, 250, 0.4));
+}
+
+@keyframes nf-glow-pulse {
+    0%, 100% { filter: drop-shadow(0 0 20px rgba(167, 139, 250, 0.3)); }
+    50%       { filter: drop-shadow(0 0 50px rgba(167, 139, 250, 0.7)); }
+}
+
+/* ─── Title ───────────────────────────────────────────────── */
+.nf-title {
+    font-size: clamp(1.2rem, 3vw, 1.75rem);
+    font-weight: 700;
+    margin: 0;
+    background: linear-gradient(90deg, #e2e8f0, #a78bfa);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* ─── Subtitle ────────────────────────────────────────────── */
+.nf-sub {
+    font-size: clamp(0.9rem, 2vw, 1.05rem);
+    color: #94a3b8;
+    line-height: 1.7;
+    max-width: 420px;
+    margin: 0;
+}
+
+/* ─── CTA Button ──────────────────────────────────────────── */
+.nf-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-top: 0.75rem;
+    padding: 0.85rem 2.2rem;
+    border-radius: 100px;
+    font-size: 1rem;
+    font-weight: 700;
+    text-decoration: none;
+    color: white;
+    background: linear-gradient(135deg, #7c3aed, #4f46e5);
+    border: 1px solid rgba(167, 139, 250, 0.3);
+    box-shadow: 0 4px 20px rgba(124, 58, 237, 0.35),
+                0 0 0 0 rgba(167, 139, 250, 0);
+    transition: transform 0.25s ease,
+                box-shadow 0.25s ease,
+                background 0.25s ease;
+    letter-spacing: 0.3px;
+}
+
+.nf-btn-icon {
+    font-size: 1.2rem;
+    animation: nf-rocket 1.8s ease-in-out infinite;
+}
+
+@keyframes nf-rocket {
+    0%, 100% { transform: translateY(0)   rotate(-45deg); }
+    50%       { transform: translateY(-5px) rotate(-45deg); }
+}
+
+.nf-btn:hover {
+    transform: translateY(-3px) scale(1.04);
+    background: linear-gradient(135deg, #8b5cf6, #6366f1);
+    box-shadow: 0 8px 30px rgba(124, 58, 237, 0.6),
+                0 0 60px rgba(167, 139, 250, 0.25),
+                0 0 0 1px rgba(167, 139, 250, 0.4);
+}
+
+.nf-btn:active {
+    transform: translateY(0) scale(0.98);
+}
+
+/* ─── Ambient glow orbs ───────────────────────────────────── */
+.nf-container::before,
+.nf-container::after {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    pointer-events: none;
+    z-index: 0;
+}
+
+.nf-container::before {
+    width: 380px;
+    height: 380px;
+    background: rgba(124, 58, 237, 0.15);
+    top: -10%;
+    right: -5%;
+    animation: nf-orb 8s ease-in-out infinite alternate;
+}
+
+.nf-container::after {
+    width: 300px;
+    height: 300px;
+    background: rgba(59, 130, 246, 0.12);
+    bottom: 0;
+    left: -5%;
+    animation: nf-orb 10s ease-in-out infinite alternate-reverse;
+}
+
+@keyframes nf-orb {
+    0%   { transform: translate(0, 0) scale(1); }
+    100% { transform: translate(30px, 20px) scale(1.15); }
+}
