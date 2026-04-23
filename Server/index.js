@@ -55,6 +55,10 @@ app.use(cors({
     }
 }));
 
+app.get('/health', (req, res) => {
+    res.status(200).json({ status: 'ok' });
+});
+
 mongoose.connect
     (process.env.MONGO_DB, { useNewUrlParser: true, useUnifiedTopology: true }
     ).then(() =>
