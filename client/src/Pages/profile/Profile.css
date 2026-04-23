@@ -3,6 +3,8 @@
     display: grid;
     grid-template-columns: 18rem auto 20rem;
     gap: 1rem;
+    max-width: 1440px;
+    margin: 0 auto;
 }
 
 
@@ -20,4 +22,27 @@
     align-self: start;
     position: sticky;
     top: 1rem;
+}
+
+@media (max-width: 1024px) {
+    .Profile {
+        grid-template-columns: minmax(14rem, 16rem) minmax(0, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .Profile {
+        grid-template-columns: 1fr;
+        padding-bottom: 1rem;
+    }
+
+    .ProfilePage-Center,
+    .profile-left-guest {
+        min-width: 0;
+        width: 100%;
+    }
+
+    .profile-left-guest {
+        position: static;
+    }
 }

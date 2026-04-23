@@ -106,3 +106,41 @@
     object-fit: cover;
     border-radius: 0.5rem;
 }
+
+@media (max-width: 600px) {
+    .PostShare {
+        gap: 0.75rem;
+        padding: 0.85rem;
+        border-radius: 1rem;
+    }
+
+    .PostShare > img {
+        width: 2.5rem;
+        height: 2.5rem;
+    }
+
+    .PostShare > div > input {
+        font-size: 0.95rem;
+        padding: 11px;
+    }
+
+    .postOptions {
+        align-items: stretch;
+        gap: 0.75rem;
+    }
+
+    .postIcons,
+    .option,
+    .ps-button {
+        width: 100%;
+    }
+
+    .option,
+    .ps-button {
+        min-height: 2.5rem;
+    }
+
+    .previewImage > img {
+        height: 14rem;
+    }
+}

@@ -34,3 +34,14 @@
     font-size: 15px;
     color: var(--gray);
 }
+
+@media (max-width: 768px) {
+    .TrendCard {
+        padding: 1rem;
+        border-radius: 1rem;
+    }
+
+    .trend:hover {
+        transform: none;
+    }
+}

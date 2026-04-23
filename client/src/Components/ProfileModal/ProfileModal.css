@@ -113,4 +113,23 @@
     .infoForm>div {
         grid-template-columns: 1fr;
     }
+
+    .infoForm {
+        padding: 1rem;
+        gap: 1rem;
+    }
+
+    .infoForm h3 {
+        font-size: 1.15rem;
+    }
+
+    .file-upload-label {
+        min-height: 76px;
+        padding: 1rem;
+    }
+
+    .mantine-Modal-content {
+        width: calc(100vw - 1rem) !important;
+        max-width: calc(100vw - 1rem) !important;
+    }
 }

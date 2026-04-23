@@ -10,6 +10,7 @@
     border: var(--glassBorder);
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
     transition: transform 0.2s ease, box-shadow 0.2s ease;
+    min-width: 0;
 }
 
 .Post:hover {
@@ -148,4 +149,39 @@
     height: 100%;
     padding: 8px 15px;
     font-size: 12px;
+}
+
+@media (max-width: 600px) {
+    .Post {
+        padding: 0.85rem;
+        gap: 0.85rem;
+        border-radius: 0.9rem;
+    }
+
+    .Post:hover {
+        transform: none;
+    }
+
+    .Post>img {
+        max-height: 16rem;
+    }
+
+    .postReact {
+        gap: 1rem;
+    }
+
+    .commentInputContainer {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .commentButton {
+        width: 100%;
+        height: 2.4rem;
+    }
+
+    .commentBody {
+        min-width: 0;
+        word-break: break-word;
+    }
 }

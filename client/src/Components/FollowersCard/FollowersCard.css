@@ -101,3 +101,26 @@
     /* ADDED: Prevents the button from shrinking or stretching weirdly */
     flex-shrink: 0;
 }
+
+@media (max-width: 768px) {
+    .FollowersCard {
+        border-radius: 1rem;
+        padding: 1rem;
+    }
+
+    .follower:hover {
+        transform: none;
+    }
+}
+
+@media (max-width: 420px) {
+    .follower {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .fc-button,
+    .msg-button {
+        width: 100%;
+    }
+}

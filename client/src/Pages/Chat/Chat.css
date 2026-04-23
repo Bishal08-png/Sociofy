@@ -4,6 +4,8 @@
     grid-template-columns: 22rem auto;
     gap: 1rem;
     padding: 1rem;
+    min-height: calc(100vh - 2rem);
+    box-sizing: border-box;
 }
 
 .Left-side-chat {
@@ -39,6 +41,7 @@
     flex-direction: column;
     gap: 1rem;
     height: 100%;
+    min-width: 0;
 }
 
 .conversation-item {
@@ -108,4 +111,41 @@
     text-align: center;
     padding: 1rem;
     line-height: 1.5;
+}
+
+@media (max-width: 900px) {
+    .Chat {
+        grid-template-columns: 18rem minmax(0, 1fr);
+        padding: 0.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .Chat {
+        grid-template-columns: 1fr;
+        min-height: auto;
+        padding: 0;
+        padding-bottom: 1rem;
+    }
+
+    .Chat-container {
+        min-height: auto;
+        max-height: 38vh;
+        border-radius: 1rem;
+    }
+
+    .Right-side-chat {
+        min-height: 60vh;
+    }
+}
+
+@media (max-width: 480px) {
+    .conversation-item {
+        padding: 9px;
+    }
+
+    .conv-avatar {
+        width: 40px;
+        height: 40px;
+    }
 }

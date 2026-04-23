@@ -28,14 +28,18 @@
 
 .ProfileImages>img:nth-of-type(1) {
     width: 100%;
+    height: 9rem;
+    object-fit: cover;
 }
 
 .ProfileImages>img:nth-of-type(2) {
     width: 6rem;
+    height: 6rem;
     border-radius: 50%;
     position: absolute;
     bottom: -3rem;
     box-shadow: 0 0 0 4px #0F111A, 0 8px 16px rgba(0, 0, 0, 0.4);
+    object-fit: cover;
 }
 
 .ProfileName {
@@ -128,4 +132,51 @@
 .ProfileCard > span:hover {
     color: var(--purplePain);
     text-shadow: 0 0 10px rgba(181, 120, 255, 0.5);
+}
+
+@media (max-width: 768px) {
+    .ProfileCard:hover {
+        transform: none;
+    }
+
+    .ProfileImages>img:nth-of-type(1) {
+        height: 12rem;
+    }
+
+    .followStatus > div {
+        max-width: 24rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .ProfileCard {
+        border-radius: 1rem;
+    }
+
+    .ProfileImages>img:nth-of-type(1) {
+        height: 8rem;
+    }
+
+    .ProfileImages>img:nth-of-type(2) {
+        width: 5rem;
+        height: 5rem;
+        bottom: -2.5rem;
+    }
+
+    .ProfileName {
+        margin-top: 2.6rem;
+    }
+
+    .followStatus > div {
+        width: 95%;
+        gap: 0.5rem;
+    }
+
+    .follow > :nth-of-type(1) {
+        font-size: 1rem;
+    }
+
+    .follow > :nth-of-type(2) {
+        font-size: 0.78rem;
+    }
 }

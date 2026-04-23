@@ -113,3 +113,23 @@
     opacity: 0.85;
     transform: scale(1.03);
 }
+
+@media (max-width: 768px) {
+    .MiniProfileCard:hover {
+        transform: none;
+    }
+
+    .mini-cover {
+        height: 110px;
+    }
+}
+
+@media (max-width: 480px) {
+    .MiniProfileCard {
+        border-radius: 1rem;
+    }
+
+    .mini-cover {
+        height: 86px;
+    }
+}
