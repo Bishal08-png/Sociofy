@@ -81,34 +81,45 @@ Then open `http://localhost:4000`.
 
 ## Deploy
 
-### Frontend on Vercel
+### Deploy on Render (Recommended)
 
-This repo includes `vercel.json`, so Vercel can build the React app from the
-`client` folder.
+This repo includes `render.yaml` for a one-click deploy on [Render](https://render.com).
+The backend serves the built React frontend as a single unified web service.
 
-Set these Vercel environment variables:
+1. Push this repo to GitHub.
+2. Go to [render.com](https://render.com) → **New** → **Blueprint** → connect your repo.
+3. Render reads `render.yaml` automatically.
+4. Set these **Environment Variables** in the Render dashboard for your service:
 
-```env
-REACT_APP_API_URL=https://your-backend-url.com
-REACT_APP_PUBLIC_FOLDER=https://your-backend-url.com/images/
+| Variable | Value |
+|---|---|
+| `MONGO_DB` | Your MongoDB Atlas connection string |
+| `JWT_KEY` | A long random secret string |
+| `CLIENT_URL` | Your Render service URL (e.g. `https://sociofy.onrender.com`) |
+
+5. Click **Deploy**. Render will install dependencies, build the React app, and start the Express server.
+6. Once deployed, open `https://your-service.onrender.com`.
+
+> **Note:** Render's free tier spins down after inactivity. Uploaded images are stored on an ephemeral filesystem and will be lost on redeploy. For persistent image storage, integrate a cloud storage service like Cloudinary or AWS S3.
+
+### Manual Build (Self-Hosting / VPS)
+
+```bash
+# 1. Build the React frontend
+cd client && npm install && npm run build
+
+# 2. Start the backend (it serves the React build)
+cd ../Server && npm install && node index.js
 ```
 
-Then import the GitHub repository in Vercel and deploy.
-
-### Backend
-
-The Express and Socket.IO backend needs a Node server host. Use a service that
-supports long-running Node processes and WebSockets, then set:
+Set environment variables in `Server/.env`:
 
 ```env
 PORT=4000
 MONGO_DB=your_mongodb_connection_string
 JWT_KEY=your_secret_key
-CLIENT_URL=https://your-vercel-app.vercel.app
+CLIENT_URL=https://your-domain.com
 ```
-
-Vercel is excellent for the React frontend, but Socket.IO needs a backend host
-with WebSocket support for real-time chat.
 
 ## Project Structure
 

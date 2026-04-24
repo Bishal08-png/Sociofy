@@ -37,8 +37,8 @@ const io = new Server(httpServer, {
 
 
 // to serve images for public (public folder)
-app.use(express.static('public'));
-app.use('/images', express.static('public/images'));
+app.use(express.static(path.join(__dirname, 'public')));
+app.use('/images', express.static(path.join(__dirname, 'public', 'images')));
 
 
 // MiddleWare
