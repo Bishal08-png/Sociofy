@@ -1,9 +1,9 @@
 const trimTrailingSlash = (value) => value.replace(/\/+$/, '');
 const ensureTrailingSlash = (value) => value.endsWith('/') ? value : `${value}/`;
 
-export const API_BASE_URL = trimTrailingSlash(
-  process.env.REACT_APP_API_URL || 'http://localhost:4000'
-);
+export const API_BASE_URL = process.env.REACT_APP_API_URL 
+  ? trimTrailingSlash(process.env.REACT_APP_API_URL) 
+  : ""; // Use relative path if no URL is provided (perfect for unified Render deploys)
 
 export const PUBLIC_FOLDER = ensureTrailingSlash(
   process.env.REACT_APP_PUBLIC_FOLDER || `${API_BASE_URL}/images`
