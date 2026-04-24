@@ -50,10 +50,23 @@ const ProfileCard = ({ location }) => {
     // Derive following state from the logged-in user's following list
     const isFollowing = user.following?.includes(profileUser?._id) || false;
 
-    const handleFollow = () => {
-        isFollowing
-            ? dispatch(unFollowUser(profileUser._id, user))
-            : dispatch(followUser(profileUser._id, user));
+    const handleFollow = async () => {
+        // Optimistic update for local profileUser state
+        if (profileUser) {
+            const isFollowingNow = !isFollowing;
+            const updatedFollowers = isFollowingNow
+                ? [...(profileUser.followers || []), user._id]
+                : (profileUser.followers || []).filter(id => id !== user._id);
+            
+            setProfileUser({ ...profileUser, followers: updatedFollowers });
+        }
+
+        // Trigger Redux action
+        if (isFollowing) {
+            dispatch(unFollowUser(profileUser._id, user));
+        } else {
+            dispatch(followUser(profileUser._id, user));
+        }
     };
 
     const handleEditField = (mode) => {
