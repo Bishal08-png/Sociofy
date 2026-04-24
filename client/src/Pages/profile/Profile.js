@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import './Profile.css';
 import ProfilePageLeft from '../../Components/ProfilePageLeft/ProfilePageLeft';
 import ProfileCard from '../../Components/ProfileCard/ProfileCard';
@@ -51,11 +51,11 @@ const Profile = () => {
       }
 
       <div className="ProfilePage-Center">
-        <ProfileCard location="profilePage" key={`card-${params.id || 'me'}`} />
-        <PostSide key={`post-${params.id || 'me'}`} />
+        <ProfileCard location="profilePage" key={`card-${profileUserId || 'me'}`} />
+        <PostSide key={`post-${profileUserId || 'me'}`} />
       </div>
 
-      <RightSide key={`right-${params.id || 'me'}`} />
+      <RightSide key={`right-${profileUserId || 'me'}`} />
 
     </div>
   )
