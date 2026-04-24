@@ -100,27 +100,50 @@
 
     /* ADDED: Prevents the button from shrinking or stretching weirdly */
     flex-shrink: 0;
+.follower-buttons {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
 }
 
-@media (max-width: 768px) {
-    .FollowersCard {
-        border-radius: 1rem;
-        padding: 1rem;
-    }
-
-    .follower:hover {
-        transform: none;
-    }
+.unfollow-btn {
+    background: rgba(255, 255, 255, 0.1) !important;
+    color: var(--black) !important;
+    border: 1px solid rgba(255, 255, 255, 0.2) !important;
 }
 
-@media (max-width: 420px) {
+.unfollow-btn:hover {
+    background: rgba(255, 91, 91, 0.2) !important;
+    border-color: rgba(255, 91, 91, 0.5) !important;
+}
+
+.msg-button {
+    background: var(--lightPurple) !important;
+}
+
+@media (max-width: 480px) {
     .follower {
-        align-items: stretch;
         flex-direction: column;
+        align-items: flex-start;
+        gap: 0.8rem;
+        padding: 1rem;
+        background: rgba(255, 255, 255, 0.02);
+        border-radius: 12px;
     }
 
-    .fc-button,
-    .msg-button {
+    .follower-buttons {
         width: 100%;
+        gap: 10px;
+    }
+
+    .fc-button {
+        flex: 1; /* Make buttons grow to fill space */
+        height: 2.4rem;
+        font-size: 0.85rem;
+    }
+
+    .msg-button {
+        flex: 0 0 3rem; /* Keep message button square-ish on mobile */
     }
 }
+

@@ -48,7 +48,7 @@ const UserFollow = ({ person }) => {
                 </div>
             </div>
 
-            <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
+            <div className="follower-buttons">
                 {isFollowing && (
                     <button
                         className='button fc-button msg-button'
@@ -56,10 +56,10 @@ const UserFollow = ({ person }) => {
                         disabled={messaging}
                         title="Send Message"
                     >
-                        <ChatBubbleOutlineIcon style={{ fontSize: '16px' }} />
+                        <ChatBubbleOutlineIcon style={{ fontSize: '18px' }} />
                     </button>
                 )}
-                <button className='button fc-button' onClick={handleFollow}>
+                <button className={isFollowing ? 'button fc-button unfollow-btn' : 'button fc-button'} onClick={handleFollow}>
                     {isFollowing ? "Unfollow" : "Follow"}
                 </button>
             </div>
