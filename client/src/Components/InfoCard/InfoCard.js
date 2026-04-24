@@ -14,7 +14,7 @@ const InfoCard = () => {
   const params = useParams();
   const profileUserId = params.id;
 
-  const { user } = useSelector((state) => state.authReducer.authData);
+  const { user } = useSelector((state) => state.authReducer.authData || {});
   const [following, setFollowing] = useState(false);
   
   const [profileUser, setProfileUser] = useState(profileUserId && profileUserId !== user._id ? null : user);
@@ -59,7 +59,7 @@ const InfoCard = () => {
   }
 
   // Check if current view is the owner's profile
-  const isOwner = !profileUserId || profileUserId === user._id;
+  const isOwner = !profileUserId || profileUserId === user?._id;
 
   if (isLoading) return <div style={{textAlign: 'center', padding: '1rem', color: 'var(--gray)'}}>Loading info...</div>;
   if (!profileUser) return null;

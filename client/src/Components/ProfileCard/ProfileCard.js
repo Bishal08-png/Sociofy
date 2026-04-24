@@ -10,7 +10,7 @@ import { resolveImageUrl } from '../../api/config';
 
 const ProfileCard = ({ location }) => {
 
-    const { user } = useSelector((state) => state.authReducer.authData);
+    const { user } = useSelector((state) => state.authReducer.authData || {});
     const posts = useSelector((state) => state.postReducer.posts);
     const dispatch = useDispatch();
     
@@ -21,12 +21,12 @@ const ProfileCard = ({ location }) => {
     const profileUserId = params.id;
 
     // Initial state avoids flashing the logged-in user's data when viewing someone else
-    const [profileUser, setProfileUser] = useState(profileUserId && profileUserId !== user._id ? null : user);
-    const [isLoading, setIsLoading] = useState(profileUserId && profileUserId !== user._id);
+    const [profileUser, setProfileUser] = useState(profileUserId && profileUserId !== user?._id ? null : user);
+    const [isLoading, setIsLoading] = useState(profileUserId && profileUserId !== user?._id);
 
     useEffect(() => {
         const fetchProfileUser = async () => {
-            if (profileUserId && profileUserId !== user._id) {
+            if (profileUserId && profileUserId !== user?._id) {
                 setIsLoading(true);
                 try {
                     const { data: fetchedUser } = await UserApi.getUser(profileUserId);
@@ -45,7 +45,7 @@ const ProfileCard = ({ location }) => {
         fetchProfileUser();
     }, [user, profileUserId]);
 
-    const isOwner = !profileUserId || profileUserId === user._id;
+    const isOwner = !profileUserId || profileUserId === user?._id;
 
     // Derive following state from the logged-in user's following list
     const isFollowing = user.following?.includes(profileUser?._id) || false;

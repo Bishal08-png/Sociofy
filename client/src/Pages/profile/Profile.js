@@ -14,17 +14,17 @@ import LogoSearch from '../../Components/LogoSearch/LogoSearch';
 const Profile = () => {
   const { id: profileUserId } = useParams();
   const dispatch = useDispatch();
-  const { user } = useSelector((state) => state.authReducer.authData);
+  const { user } = useSelector((state) => state.authReducer.authData || {});
   const [profileUser, setProfileUser] = useState(null);
 
   // Fetch the specific user's posts whenever the URL parameter changes
   useEffect(() => {
-    dispatch(getTimelinePosts(profileUserId || user._id));
-  }, [profileUserId, user._id, dispatch]);
+    dispatch(getTimelinePosts(profileUserId || user?._id));
+  }, [profileUserId, user?._id, dispatch]);
 
   useEffect(() => {
     const fetchProfileUser = async () => {
-        if (profileUserId === user._id || !profileUserId) {
+        if (profileUserId === user?._id || !profileUserId) {
             setProfileUser(user);
         } else {
             const { data } = await getUser(profileUserId);
@@ -34,7 +34,7 @@ const Profile = () => {
     fetchProfileUser();
   }, [profileUserId, user]);
 
-  const isOwner = !profileUserId || profileUserId === user._id;
+  const isOwner = !profileUserId || profileUserId === user?._id;
 
   return (
     <div className='Profile'>

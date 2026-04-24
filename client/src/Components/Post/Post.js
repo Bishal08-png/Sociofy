@@ -12,18 +12,18 @@ import { resolveImageUrl } from '../../api/config';
 
 const Post = ({ data }) => {
 
-  const { user } = useSelector((state) => state.authReducer.authData)
+  const { user } = useSelector((state) => state.authReducer.authData || {})
   const dispatch = useDispatch();
-  const [liked, setLiked] = useState(data.likes?.includes(user._id) || false)
+  const [liked, setLiked] = useState(data.likes?.includes(user?._id) || false)
   const [likes, setLikes] = useState(data.likes.length)
   const [comments, setComments] = useState(data.comments || [])
   const [showComments, setShowComments] = useState(false)
   const [commentText, setCommentText] = useState("")
-  const isOwner = user._id === data.userId;
+  const isOwner = user?._id === data.userId;
 
   const handleLike = () => {
     setLiked((prev) => !prev)
-    likePost(data._id, user._id)
+    likePost(data._id, user?._id)
     liked ? setLikes((prev) => prev - 1) : setLikes((prev) => prev + 1)
   }
 
