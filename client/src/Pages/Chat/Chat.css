@@ -1,13 +1,14 @@
 .Chat {
     position: relative;
     display: grid;
-    grid-template-columns: 22rem auto;
-    gap: 1rem;
-    padding: 1rem;
-    min-height: calc(100vh - 2rem);
+    grid-template-columns: 24rem 1fr; /* Fixed sidebar, fluid chat area */
+    gap: 1.5rem;
+    padding: 1.5rem;
+    min-height: calc(100vh - 3rem);
     box-sizing: border-box;
-    max-width: 1300px; /* Expands on desktop */
-    margin: 0 auto; /* Centered */
+    max-width: 1600px; /* Much wider for modern desktop screens */
+    width: 100%;
+    margin: 0 auto;
 }
 
 .Left-side-chat {
