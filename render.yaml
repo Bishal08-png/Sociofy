@@ -9,11 +9,17 @@ services:
     envVars:
       - key: NODE_ENV
         value: production
+      - key: PORT
+        value: 4000
       - key: MONGO_DB
         sync: false
       - key: JWT_KEY
         sync: false
       - key: CLIENT_URL
         sync: false
-      - key: PORT
-        value: 4000
+      - key: CLOUDINARY_CLOUD_NAME
+        value: dgrrpvkyv
+      - key: CLOUDINARY_API_KEY
+        sync: false
+      - key: CLOUDINARY_API_SECRET
+        sync: false

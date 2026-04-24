@@ -4,7 +4,7 @@ import PhotoOutlinedIcon from '@mui/icons-material/PhotoOutlined';
 import CloseOutlinedIcon from '@mui/icons-material/CloseOutlined';
 import { useDispatch, useSelector } from 'react-redux';
 import { uploadImage, uploadPost } from '../../actions/UploadAction';
-import { PUBLIC_FOLDER } from '../../api/config';
+import { resolveImageUrl } from '../../api/config';
 
 
 
@@ -16,7 +16,6 @@ const PostShare = () => {
     const dispatch = useDispatch();
     const desc = useRef();
     const { user } = useSelector((state) => state.authReducer.authData);
-    const serverPublic = PUBLIC_FOLDER;
 
 
     const onImageChange = (event) => {
@@ -37,7 +36,7 @@ const PostShare = () => {
 
 
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
         const newPost = {
@@ -47,14 +46,12 @@ const PostShare = () => {
 
         if (image) {
             const data = new FormData();
-            const filename = Date.now() + image.name;
-            data.append("name", filename);
             data.append("file", image);
 
-            newPost.image = filename;
-
             try {
-                dispatch(uploadImage(data))
+                // Returns the full Cloudinary URL
+                const uploadedUrl = await dispatch(uploadImage(data));
+                newPost.image = uploadedUrl;
             } catch (error) {
                 console.log(error)
             }
@@ -66,7 +63,7 @@ const PostShare = () => {
 
     return (
         <div className="PostShare">
-            <img src={user.profilePicture ? serverPublic + user.profilePicture : serverPublic + "defaultProfile.png"} alt="" />
+            <img src={resolveImageUrl(user.profilePicture, "defaultProfile.png")} alt="" />
 
             <div>
                 <input type="text" placeholder='Write a caption...' required ref={desc} />

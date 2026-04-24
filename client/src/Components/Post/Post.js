@@ -8,7 +8,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { likePost, addComment } from '../../api/PostRequest';
 import { deletePost } from '../../actions/PostAction';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
-import { PUBLIC_FOLDER } from '../../api/config';
+import { resolveImageUrl } from '../../api/config';
 
 const Post = ({ data }) => {
 
@@ -19,7 +19,6 @@ const Post = ({ data }) => {
   const [comments, setComments] = useState(data.comments || [])
   const [showComments, setShowComments] = useState(false)
   const [commentText, setCommentText] = useState("")
-  const serverPublic = PUBLIC_FOLDER;
   const isOwner = user._id === data.userId;
 
   const handleLike = () => {
@@ -50,7 +49,7 @@ const Post = ({ data }) => {
 
       <div className="postHeader">
         <img
-          src={data.profilePicture ? serverPublic + data.profilePicture : serverPublic + "defaultProfile.png"}
+          src={resolveImageUrl(data.profilePicture, "defaultProfile.png")}
           alt="avatar"
           className="postAuthorAvatar"
         />
@@ -67,7 +66,7 @@ const Post = ({ data }) => {
         )}
       </div>
 
-      <img src={data.image ? serverPublic + data.image : ""} alt="" />
+      <img src={data.image ? resolveImageUrl(data.image) : ""} alt="" />
 
       <div className="detail">
         <span>{data.desc}</span>
@@ -88,7 +87,7 @@ const Post = ({ data }) => {
           <div className="commentsList">
             {comments.map((c, i) => (
               <div key={i} className="commentItem">
-                <img src={serverPublic + c.profilePicture} alt="" className="commentAvatar" />
+                <img src={resolveImageUrl(c.profilePicture)} alt="" className="commentAvatar" />
                 <div className="commentBody">
                   <b>{c.name}</b>
                   <span>{c.text}</span>

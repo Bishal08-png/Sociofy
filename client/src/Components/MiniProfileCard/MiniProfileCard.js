@@ -2,20 +2,17 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import './MiniProfileCard.css';
-import { PUBLIC_FOLDER } from '../../api/config';
+import { resolveImageUrl } from '../../api/config';
 
 const MiniProfileCard = () => {
     const { user } = useSelector((state) => state.authReducer.authData);
-    const serverPublic = PUBLIC_FOLDER;
 
     return (
         <div className="MiniProfileCard">
             {/* Cover photo strip */}
             <div className="mini-cover">
                 <img
-                    src={user.coverPicture
-                        ? serverPublic + user.coverPicture
-                        : serverPublic + 'defaultCover.jpg'}
+                    src={resolveImageUrl(user.coverPicture, 'defaultCover.jpg')}
                     alt="cover"
                 />
             </div>
@@ -23,9 +20,7 @@ const MiniProfileCard = () => {
             {/* Avatar */}
             <div className="mini-avatar-wrap">
                 <img
-                    src={user.profilePicture
-                        ? serverPublic + user.profilePicture
-                        : serverPublic + 'defaultProfile.png'}
+                    src={resolveImageUrl(user.profilePicture, 'defaultProfile.png')}
                     alt="avatar"
                     className="mini-avatar"
                 />

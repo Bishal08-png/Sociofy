@@ -5,14 +5,13 @@ import { Link, useParams } from 'react-router-dom';
 import ProfileModal from '../ProfileModal/ProfileModal';
 import * as UserApi from '../../api/UserRequest.js';
 import { followUser, unFollowUser } from '../../actions/UserAction';
-import { PUBLIC_FOLDER } from '../../api/config';
+import { resolveImageUrl } from '../../api/config';
 
 
 const ProfileCard = ({ location }) => {
 
     const { user } = useSelector((state) => state.authReducer.authData);
     const posts = useSelector((state) => state.postReducer.posts);
-    const serverPublic = PUBLIC_FOLDER;
     const dispatch = useDispatch();
     
     const [modalOpened, setModalOpened] = useState(false);
@@ -72,8 +71,8 @@ const ProfileCard = ({ location }) => {
         <div className='ProfileCard'>
 
             <div className="ProfileImages">
-                <img src={profileUser.coverPicture ? serverPublic + profileUser.coverPicture : serverPublic + "defaultCover.jpg"} alt="" />
-                <img src={profileUser.profilePicture ? serverPublic + profileUser.profilePicture : serverPublic + "defaultProfile.png"} alt="" />
+                <img src={resolveImageUrl(profileUser.coverPicture, 'defaultCover.jpg')} alt="" />
+                <img src={resolveImageUrl(profileUser.profilePicture, 'defaultProfile.png')} alt="" />
             </div>
 
             <div className="ProfileName">

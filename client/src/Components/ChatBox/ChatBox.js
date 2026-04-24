@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from "react";
 import { addMessage, getMessages } from "../../api/MessageRequest";
 import axios from "axios";
 import "./ChatBox.css";
-import { API_BASE_URL, PUBLIC_FOLDER } from "../../api/config";
+import { API_BASE_URL, resolveImageUrl } from "../../api/config";
 
 const ChatBox = ({ chat, currentUser, setSendMessage, receivedMessage, setCurrentChat, chatUser }) => {
   const [messages, setMessages] = useState([]);
@@ -50,13 +50,11 @@ const ChatBox = ({ chat, currentUser, setSendMessage, receivedMessage, setCurren
     let imageUrl = "";
     if (image) {
       const data = new FormData();
-      const fileName = Date.now() + image.name;
-      data.append("name", fileName);
       data.append("file", image);
 
       try {
-        await axios.post(`${API_BASE_URL}/upload`, data);
-        imageUrl = fileName;
+        const res = await axios.post(`${API_BASE_URL}/upload`, data);
+        imageUrl = res.data.url; // Use Cloudinary URL
       } catch (err) {
         console.log(err);
       }
@@ -98,7 +96,7 @@ const ChatBox = ({ chat, currentUser, setSendMessage, receivedMessage, setCurren
               {chatUser && (
                 <>
                   <img
-                    src={chatUser.profilePicture ? PUBLIC_FOLDER + chatUser.profilePicture : PUBLIC_FOLDER + "defaultProfile.png"}
+                    src={resolveImageUrl(chatUser.profilePicture, "defaultProfile.png")}
                     alt="Profile"
                     className="followerImage"
                     style={{ width: "45px", height: "45px", borderRadius: "50%", objectFit: "cover", border: "2px solid rgba(255,255,255,0.1)" }}
@@ -121,7 +119,7 @@ const ChatBox = ({ chat, currentUser, setSendMessage, receivedMessage, setCurren
               >
                 <span>{message.text}</span>
                 {message.image && (
-                  <img src={`${PUBLIC_FOLDER}${message.image}`} alt="attached" className="message-image" />
+                  <img src={resolveImageUrl(message.image)} alt="attached" className="message-image" />
                 )}
                 <span>{new Date(message.createdAt).toLocaleTimeString()}</span>
               </div>

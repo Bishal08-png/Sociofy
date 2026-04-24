@@ -33,26 +33,26 @@ function ProfileModal({ modalOpened, setModalOpened, data, editMode }) {
     }
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    let UserData = formData;
+    let UserData = { ...formData };
 
     if (profileImage) {
       const data = new FormData();
-      const fileName = Date.now() + profileImage.name;
-      data.append("name", fileName);
       data.append("file", profileImage);
-      UserData.profilePicture = fileName;
-      try { dispatch(uploadImage(data)) } catch (e) { console.log(e) }
+      try {
+        const uploadedUrl = await dispatch(uploadImage(data));
+        UserData.profilePicture = uploadedUrl;
+      } catch (e) { console.log(e) }
     }
 
     if (coverImage) {
       const data = new FormData();
-      const fileName = Date.now() + coverImage.name;
-      data.append("name", fileName);
       data.append("file", coverImage);
-      UserData.coverPicture = fileName;
-      try { dispatch(uploadImage(data)) } catch (e) { console.log(e) }
+      try {
+        const uploadedUrl = await dispatch(uploadImage(data));
+        UserData.coverPicture = uploadedUrl;
+      } catch (e) { console.log(e) }
     }
 
     dispatch(updateUser(user._id, UserData));
