@@ -6,6 +6,8 @@
     padding: 1rem;
     min-height: calc(100vh - 2rem);
     box-sizing: border-box;
+    max-width: 1300px; /* Expands on desktop */
+    margin: 0 auto; /* Centered */
 }
 
 .Left-side-chat {
