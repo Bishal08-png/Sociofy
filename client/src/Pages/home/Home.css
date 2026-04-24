@@ -12,12 +12,50 @@
     .Home {
         grid-template-columns: minmax(14rem, 16rem) minmax(0, 1fr);
     }
+    .Home > .RightSide {
+        display: none;
+    }
 }
 
 /* ── MOBILE (≤ 768px): single column, sidebar becomes bottom nav ── */
 @media (max-width: 768px) {
     .Home {
         grid-template-columns: 1fr;
-        padding-bottom: 1rem;
+        padding: 0;
+        gap: 0;
+    }
+
+    .Home > .ProfileSide,
+    .Home > .RightSide {
+        display: none;
+    }
+
+    .Home > .PostSide {
+        width: 100%;
+        margin-top: 4.5rem; /* Space for fixed mobile header if we add one */
     }
 }
+
+/* Mobile Header logic in Home.js or global */
+.mobile-header {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4rem;
+    background: rgba(15, 17, 26, 0.8);
+    backdrop-filter: blur(15px);
+    z-index: 1000;
+    align-items: center;
+    padding: 0 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+@media (max-width: 768px) {
+    .mobile-header {
+        display: flex;
+        justify-content: space-between;
+    }
+}
+

@@ -6,7 +6,7 @@ import { userChats } from "../../api/ChatRequest";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import { io } from "socket.io-client";
-import { API_BASE_URL, PUBLIC_FOLDER } from "../../api/config";
+import { resolveImageUrl } from "../../api/config";
 
 const Chat = () => {
   const socket = useRef();
@@ -90,13 +90,17 @@ const Chat = () => {
     });
   }, []);
 
-  const serverPublic = PUBLIC_FOLDER;
-
   return (
     <div className="Chat">
-      {/* Left Side */}
-      <div className="Left-side-chat">
-        <LogoSearch />
+      {/* Left Side (Chat List) */}
+      <div className={`Left-side-chat ${currentChat ? "mobile-hidden" : ""}`}>
+        <div className="mobile-header">
+           <LogoSearch />
+        </div>
+        <div className="desktop-logo">
+           <LogoSearch />
+        </div>
+        
         <div className="Chat-container">
           <h2>Chats</h2>
           <div className="Chat-list">
@@ -116,11 +120,7 @@ const Chat = () => {
                 >
                   <div className="conv-avatar-wrap">
                     <img
-                      src={
-                        otherUser?.profilePicture
-                          ? serverPublic + otherUser.profilePicture
-                          : serverPublic + "defaultProfile.png"
-                      }
+                      src={resolveImageUrl(otherUser?.profilePicture, "defaultProfile.png")}
                       alt=""
                       className="conv-avatar"
                     />
@@ -141,8 +141,13 @@ const Chat = () => {
         </div>
       </div>
 
-      {/* Right Side */}
-      <div className="Right-side-chat">
+      {/* Right Side (Chat Box) */}
+      <div className={`Right-side-chat ${!currentChat ? "mobile-hidden" : ""}`}>
+        {currentChat && (
+          <div className="mobile-back-btn" onClick={() => setCurrentChat(null)}>
+             <span>← Back to Chats</span>
+          </div>
+        )}
         <ChatBox
           chat={currentChat}
           currentUser={user._id}

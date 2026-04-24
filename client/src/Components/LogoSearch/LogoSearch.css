@@ -107,19 +107,27 @@
     .brandName {
         font-size: 1.6rem;
     }
+
+    /* Horizontal layout for mobile header */
+    .mobile-header .LogoSearch {
+        flex-direction: row;
+        align-items: center;
+        width: 100%;
+        gap: 1rem;
+    }
+
+    .mobile-header .brandLogo {
+        width: 32px;
+        height: 32px;
+    }
+
+    .mobile-header .brandName {
+        display: none; /* Hide name in header to save space */
+    }
+
+    .mobile-header .Search {
+        flex: 1;
+        padding: 5px 8px;
+    }
 }
 
-@media (max-width: 420px) {
-    .brandLogo {
-        width: 38px;
-        height: 38px;
-    }
-
-    .brandName {
-        font-size: 1.45rem;
-    }
-
-    .Search {
-        padding: 6px;
-    }
-}

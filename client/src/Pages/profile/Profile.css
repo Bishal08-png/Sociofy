@@ -28,21 +28,26 @@
     .Profile {
         grid-template-columns: minmax(14rem, 16rem) minmax(0, 1fr);
     }
+    .Profile > .RightSide {
+        display: none;
+    }
 }
 
 @media (max-width: 768px) {
     .Profile {
         grid-template-columns: 1fr;
-        padding-bottom: 1rem;
+        padding: 0;
+        gap: 0;
     }
 
-    .ProfilePage-Center,
-    .profile-left-guest {
-        min-width: 0;
+    .Profile > .profile-left-guest,
+    .Profile > .RightSide {
+        display: none;
+    }
+
+    .ProfilePage-Center {
         width: 100%;
-    }
-
-    .profile-left-guest {
-        position: static;
+        margin-top: 4.5rem;
     }
 }
+

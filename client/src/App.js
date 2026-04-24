@@ -6,6 +6,7 @@ import Profile from './Pages/profile/Profile';
 import Chat from './Pages/Chat/Chat';
 import NotFound from './Pages/NotFound/NotFound';
 import { Routes, Route, Navigate } from 'react-router-dom';
+import MobileNav from './Components/MobileNav/MobileNav';
 
 function App() {
 
@@ -25,6 +26,8 @@ function App() {
         <Route path='/chat' element={user ? <Chat /> : <Navigate to='../auth' />} />
         <Route path='*' element={<NotFound />} />
       </Routes>
+
+      <MobileNav />
 
     </div>
   );

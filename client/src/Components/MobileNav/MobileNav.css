@@ -1,0 +1,51 @@
+.MobileNav {
+    display: none;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 4.5rem;
+    background: rgba(15, 17, 26, 0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    z-index: 1000;
+    justify-content: space-around;
+    align-items: center;
+    padding: 0 1rem;
+    box-sizing: border-box;
+}
+
+.MobileNav a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    color: var(--gray);
+    gap: 4px;
+    transition: all 0.3s ease;
+}
+
+.MobileNav a svg {
+    font-size: 1.6rem;
+}
+
+.MobileNav a span {
+    font-size: 0.7rem;
+    font-weight: 500;
+}
+
+.MobileNav a.active {
+    color: var(--lightPurple);
+}
+
+.MobileNav a.active svg {
+    transform: translateY(-2px);
+    filter: drop-shadow(0 0 8px var(--lightPurple));
+}
+
+@media (max-width: 768px) {
+    .MobileNav {
+        display: flex;
+    }
+}
