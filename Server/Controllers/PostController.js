@@ -147,7 +147,7 @@ export const timeline = async (req, res) => {
         const enrichedPosts = await Promise.all(
             allPosts.map(async (post) => {
                 const postObj = post.toObject ? post.toObject() : post;
-                if (!postObj.name) {
+                if (!postObj.name || !postObj.profilePicture || postObj.profilePicture === "defaultProfile.png") {
                     const postUser = await UserModel.findById(postObj.userId);
                     if (postUser) {
                         postObj.name = postUser.firstname + " " + postUser.lastname;

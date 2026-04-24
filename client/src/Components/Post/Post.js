@@ -51,7 +51,7 @@ const Post = ({ data }) => {
         <img
           src={resolveImageUrl(data.profilePicture, "defaultProfile.png")}
           alt="avatar"
-          className="postAuthorAvatar"
+          className="postAuthorAvatar" onError={(e) => { e.target.src = resolveImageUrl("defaultProfile.png") }}
         />
         <div className="postAuthorInfo">
           <span className="postAuthorName">{data.name || "Unknown User"}</span>
@@ -87,7 +87,7 @@ const Post = ({ data }) => {
           <div className="commentsList">
             {comments.map((c, i) => (
               <div key={i} className="commentItem">
-                <img src={resolveImageUrl(c.profilePicture)} alt="" className="commentAvatar" />
+                <img src={resolveImageUrl(c.profilePicture)} alt="" className="commentAvatar" onError={(e) => { e.target.src = resolveImageUrl("defaultProfile.png") }} />
                 <div className="commentBody">
                   <b>{c.name}</b>
                   <span>{c.text}</span>
