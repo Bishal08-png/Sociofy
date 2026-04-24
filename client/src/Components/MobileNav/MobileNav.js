@@ -10,7 +10,7 @@ import { useSelector } from 'react-redux';
 
 const MobileNav = () => {
     const location = useLocation();
-    const { user } = useSelector((state) => state.authReducer.authData);
+    const { user } = useSelector((state) => state.authReducer.authData || {});
 
     if (!user) return null;
 
