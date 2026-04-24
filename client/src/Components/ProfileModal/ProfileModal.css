@@ -125,7 +125,9 @@
         bottom: 0;
         z-index: 10;
         margin-top: 1.5rem;
-        box-shadow: 0 -5px 15px rgba(0,0,0,0.2);
+        width: 100%;
+        background: linear-gradient(135deg, #7b2ff7, #f107a3);
+        box-shadow: 0 -10px 20px rgba(15, 17, 26, 0.9); /* Dark shadow to separate from content */
     }
 
     .infoForm h3 {

@@ -1,4 +1,5 @@
 import { Modal, useMantineTheme } from '@mantine/core';
+import { useMediaQuery } from '@mantine/hooks';
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { uploadImage } from '../../actions/UploadAction';
@@ -7,6 +8,7 @@ import './ProfileModal.css';
 
 function ProfileModal({ modalOpened, setModalOpened, data, editMode }) {
   const theme = useMantineTheme();
+  const isMobile = useMediaQuery('(max-width: 768px)');
   const { password, ...other } = data;
   const [formData, setFormData] = useState(other);
   const [profileImage, setProfileImage] = useState(null);
@@ -70,7 +72,8 @@ function ProfileModal({ modalOpened, setModalOpened, data, editMode }) {
     <Modal
       opened={modalOpened}
       onClose={() => setModalOpened(false)}
-      size="55%"
+      size={isMobile ? "100%" : "55%"}
+      fullScreen={isMobile}
       overlayProps={{
         color: theme.colorScheme === 'dark' ? theme.colors.dark[9] : theme.colors.gray[2],
         opacity: 0.55,
