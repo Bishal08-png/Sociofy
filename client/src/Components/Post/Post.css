@@ -61,8 +61,9 @@
 
 .Post>img {
     width: 100%;
-    max-height: 20rem;
-    object-fit: cover;
+    max-height: 35rem; /* Increased to show more of tall images */
+    object-fit: contain; /* Show full image */
+    background: rgba(0, 0, 0, 0.2); /* Subtle background for empty space */
     border-radius: 0.5rem;
 }
 

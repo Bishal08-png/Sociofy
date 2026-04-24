@@ -1,4 +1,5 @@
 import UserModel from "../Models/userModel.js";
+import NotificationModel from "../Models/NotificationModel.js";
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 
@@ -127,6 +128,15 @@ export const followUser = async (req, res) => {
             if (!followUser.followers.includes(_id)) {
                 await followUser.updateOne({ $addToSet: { followers: _id } })
                 await followingUser.updateOne({ $addToSet: { following: id } })
+
+                // CREATE NOTIFICATION
+                const newNotification = new NotificationModel({
+                    userId: id, // recipient
+                    senderId: _id,
+                    senderName: followingUser.firstname + " " + followingUser.lastname,
+                    type: "follow",
+                });
+                await newNotification.save();
 
                 res.status(200).json("User Followed!")
             } else {

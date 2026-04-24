@@ -112,8 +112,9 @@
     .mobile-header .LogoSearch {
         flex-direction: row;
         align-items: center;
+        justify-content: flex-end; /* STRICT RIGHT ALIGNMENT */
         width: 100%;
-        gap: 1rem;
+        gap: 0.5rem;
     }
 
     .mobile-header .brandLogo {
