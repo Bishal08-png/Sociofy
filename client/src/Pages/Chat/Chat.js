@@ -6,7 +6,7 @@ import { userChats } from "../../api/ChatRequest";
 import axios from "axios";
 import { useSelector } from "react-redux";
 import { io } from "socket.io-client";
-import { resolveImageUrl } from "../../api/config";
+import { resolveImageUrl, API_BASE_URL } from "../../api/config";
 
 const Chat = () => {
   const socket = useRef();
