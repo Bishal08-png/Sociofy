@@ -2,9 +2,10 @@ import React from 'react';
 import './MobileNav.css';
 import { Link, useLocation } from 'react-router-dom';
 import HomeIcon from '@mui/icons-material/Home';
-import SettingsIcon from '@mui/icons-material/Settings';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import QuestionAnswerIcon from '@mui/icons-material/QuestionAnswer';
+import GroupIcon from '@mui/icons-material/Group';
+import PersonIcon from '@mui/icons-material/Person';
 import { useSelector } from 'react-redux';
 
 const MobileNav = () => {
@@ -19,9 +20,14 @@ const MobileNav = () => {
                 <HomeIcon />
                 <span>Home</span>
             </Link>
+
+            <Link to="/discover" className={location.pathname === '/discover' ? 'active' : ''}>
+                <GroupIcon />
+                <span>People</span>
+            </Link>
             
             <Link to={`/profile/${user._id}`} className={location.pathname.includes('/profile') ? 'active' : ''}>
-                <SettingsIcon />
+                <PersonIcon />
                 <span>Profile</span>
             </Link>
 

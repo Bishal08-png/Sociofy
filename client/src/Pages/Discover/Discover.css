@@ -1,0 +1,25 @@
+.Discover-container {
+    background: var(--cardColor);
+    border-radius: 1.5rem;
+    padding: 1.5rem;
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: var(--glassBorder);
+    min-height: 80vh;
+}
+
+@media (max-width: 768px) {
+    .Discover-container {
+        margin-top: 4.5rem;
+        padding: 0.5rem;
+        border-radius: 0;
+        background: transparent;
+        border: none;
+        backdrop-filter: none;
+    }
+
+    .Discover-container .FollowersCard {
+        background: var(--cardColor);
+        border: var(--glassBorder);
+    }
+}
